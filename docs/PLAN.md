@@ -7,7 +7,7 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 
 - [x] `.gitignore`, `.editorconfig`, MIT `LICENSE`
 - [x] README skeleton and this plan
-- [ ] `versions.env` and Makefile skeleton with `doctor`
+- [x] `versions.env` and Makefile skeleton with `doctor`
 
 ## Phase 1 — `feat/demo-app`
 
