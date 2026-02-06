@@ -26,8 +26,8 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 - [x] `bootstrap/kind-config.yaml` and `make cluster-up`
 - [x] `bootstrap/install-argocd.sh` (Helm, pinned chart; prints how to get the admin password without writing it to the repo)
 - [x] Port-forward helper for the UI and `make bootstrap`
-- [ ] Local bootstrap documented
-- [ ] Acceptance: Argo CD healthy; UI reachable; evidence saved (`kubectl get pods -A`, `argocd version`)
+- [x] Local bootstrap documented
+- [x] Acceptance: Argo CD healthy; UI reachable; evidence saved (`kubectl get pods -A`, `argocd version`)
 
 ## Phase 3 — `feat/app-of-apps-platform` → tag `v0.1.0`
 
