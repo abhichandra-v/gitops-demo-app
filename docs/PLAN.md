@@ -15,7 +15,7 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 - [x] Fault mode `FAULT_MODE=error-40pct` (about 40% of requests return HTTP 500)
 - [x] Tests for fault injection and metrics
 - [x] Multi-stage, small, non-root Dockerfile
-- [ ] `.github/workflows/app-image.yml`: matrix build of `v1.0.0`, `v2.0.0`, `v3.0.0-bad`, pushed to GHCR
+- [x] `.github/workflows/app-image.yml`: matrix build of `v1.0.0`, `v2.0.0`, `v3.0.0-bad`, pushed to GHCR
 - [x] Acceptance: tests pass; each image runs locally; `v3.0.0-bad` returns ~40% 500s over 200 requests (count saved to evidence); `/metrics` exposes the status-code counter
 
 > 🛑 **Checkpoint A:** owner pushes, enables Actions, confirms the three images exist and sets the GHCR package to public.
