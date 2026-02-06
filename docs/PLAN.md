@@ -23,7 +23,7 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 
 ## Phase 2 — `feat/cluster-bootstrap`
 
-- [ ] `bootstrap/kind-config.yaml` and `make cluster-up`
+- [x] `bootstrap/kind-config.yaml` and `make cluster-up`
 - [ ] `bootstrap/install-argocd.sh` (Helm, pinned chart; prints how to get the admin password without writing it to the repo)
 - [ ] Port-forward helper for the UI and `make bootstrap`
 - [ ] Local bootstrap documented
