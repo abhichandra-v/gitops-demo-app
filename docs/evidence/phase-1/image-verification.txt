@@ -1,0 +1,52 @@
+===== 2026-10-13T09:23:42Z ghcr.io/abhichandra-v/gitops-demo-app:v1.0.0 =====
+$ docker run -d --name demo-verify-v1-0-0 -p 18080:8080 ghcr.io/abhichandra-v/gitops-demo-app:v1.0.0
+$ docker inspect -f '{{.Config.User}}' demo-verify-v1-0-0
+65532:65532
+$ curl -s localhost:18080/healthz
+ok
+$ 200 x curl -s -o /dev/null -w '%{http_code}' localhost:18080/ | sort | uniq -c
+    200 200
+$ curl -s localhost:18080/  (one sample body)
+{"version":"v1.0.0","color":"blue","hostname":"80101e6e55fe"}
+$ curl -s localhost:18080/metrics | grep -E '^(http_requests_total|demo_app_info|http_request_duration_seconds_count)'
+demo_app_info{version="v1.0.0"} 1
+http_request_duration_seconds_count{code="200"} 201
+http_requests_total{code="200"} 201
+
+===== 2026-10-13T09:24:24Z ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0 =====
+$ docker run -d --name demo-verify-v2-0-0 -p 18080:8080 ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0
+$ docker inspect -f '{{.Config.User}}' demo-verify-v2-0-0
+65532:65532
+$ curl -s localhost:18080/healthz
+ok
+$ 200 x curl -s -o /dev/null -w '%{http_code}' localhost:18080/ | sort | uniq -c
+    200 200
+$ curl -s localhost:18080/  (one sample body)
+{"version":"v2.0.0","color":"green","hostname":"5dd896c1b488"}
+$ curl -s localhost:18080/metrics | grep -E '^(http_requests_total|demo_app_info|http_request_duration_seconds_count)'
+demo_app_info{version="v2.0.0"} 1
+http_request_duration_seconds_count{code="200"} 201
+http_requests_total{code="200"} 201
+
+===== 2026-10-13T09:24:58Z ghcr.io/abhichandra-v/gitops-demo-app:v3.0.0-bad =====
+$ docker run -d --name demo-verify-v3-0-0-bad -p 18080:8080 ghcr.io/abhichandra-v/gitops-demo-app:v3.0.0-bad
+$ docker inspect -f '{{.Config.User}}' demo-verify-v3-0-0-bad
+65532:65532
+$ curl -s localhost:18080/healthz
+ok
+$ 200 x curl -s -o /dev/null -w '%{http_code}' localhost:18080/ | sort | uniq -c
+    119 200
+     81 500
+$ curl -s localhost:18080/  (one sample body)
+{"version":"v3.0.0-bad","color":"red","hostname":"ef523edbba85","fault_mode":"error-40pct"}
+$ curl -s localhost:18080/metrics | grep -E '^(http_requests_total|demo_app_info|http_request_duration_seconds_count)'
+demo_app_info{version="v3.0.0-bad"} 1
+http_request_duration_seconds_count{code="200"} 120
+http_request_duration_seconds_count{code="500"} 81
+http_requests_total{code="200"} 120
+http_requests_total{code="500"} 81
+
+===== 2026-10-13T09:25:38Z image sizes =====
+ghcr.io/abhichandra-v/gitops-demo-app:v3.0.0-bad  19.3MB
+ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  19.3MB
+ghcr.io/abhichandra-v/gitops-demo-app:v1.0.0  19.3MB
