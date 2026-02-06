@@ -1,0 +1,48 @@
+# 2026-10-13T09:38:10Z
+$ kubectl --context kind-gitops-rollback get nodes
+NAME                            STATUS   ROLES           AGE     VERSION
+gitops-rollback-control-plane   Ready    control-plane   7m58s   v1.36.4
+gitops-rollback-worker          Ready    <none>          7m33s   v1.36.4
+gitops-rollback-worker2         Ready    <none>          7m34s   v1.36.4
+
+# 2026-10-13T09:38:11Z
+$ kubectl --context kind-gitops-rollback get pods -A
+NAMESPACE            NAME                                                    READY   STATUS    RESTARTS   AGE
+argocd               argocd-application-controller-0                         1/1     Running   0          2m27s
+argocd               argocd-redis-86f677dd5d-h9gwz                           1/1     Running   0          2m28s
+argocd               argocd-repo-server-7b4b84f86f-n99bx                     1/1     Running   0          2m27s
+argocd               argocd-server-558fdb4c44-s7d4r                          1/1     Running   0          2m28s
+kube-system          coredns-589f44dc88-kh6tc                                1/1     Running   0          7m47s
+kube-system          coredns-589f44dc88-rbl8w                                1/1     Running   0          7m47s
+kube-system          etcd-gitops-rollback-control-plane                      1/1     Running   0          7m59s
+kube-system          kindnet-28sqs                                           1/1     Running   0          7m45s
+kube-system          kindnet-cvbfv                                           1/1     Running   0          7m34s
+kube-system          kindnet-z8mph                                           1/1     Running   0          7m34s
+kube-system          kube-apiserver-gitops-rollback-control-plane            1/1     Running   0          7m58s
+kube-system          kube-controller-manager-gitops-rollback-control-plane   1/1     Running   0          7m58s
+kube-system          kube-proxy-98847                                        1/1     Running   0          7m34s
+kube-system          kube-proxy-kbpql                                        1/1     Running   0          7m47s
+kube-system          kube-proxy-wvhzh                                        1/1     Running   0          7m35s
+kube-system          kube-scheduler-gitops-rollback-control-plane            1/1     Running   0          7m53s
+local-path-storage   local-path-provisioner-56c4685b7c-grb57                 1/1     Running   0          7m41s
+
+# 2026-10-13T09:38:13Z
+$ helm --kube-context kind-gitops-rollback -n argocd list
+NAME  	NAMESPACE	REVISION	UPDATED                              	STATUS  	CHART          	APP VERSION
+argocd	argocd   	1       	2026-10-13 15:01:29.0945834 +0530 IST	deployed	argo-cd-10.10.3	v3.5.5     
+
+# 2026-10-13T09:38:14Z
+$ argocd version --port-forward --port-forward-namespace argocd --plaintext --kube-context kind-gitops-rollback --short
+argocd: v3.5.5+a5038b0
+argocd-server: v3.5.5
+
+# 2026-10-13T09:38:21Z
+$ kubectl --context kind-gitops-rollback -n argocd get cm argocd-cm -o jsonpath='{.data.timeout\.reconciliation}'
+30s
+# 2026-10-13T09:38:29Z
+$ curl -s -o /dev/null -w 'HTTP %{http_code}\n' http://localhost:8443/
+HTTP 200
+
+# 2026-10-13T09:38:30Z
+$ curl -s http://localhost:8443/api/version
+{"Version":"v3.5.5"}
