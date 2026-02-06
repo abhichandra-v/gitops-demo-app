@@ -1,0 +1,22 @@
+# Values for the argo-cd Helm chart. Used twice with identical content:
+# by bootstrap/install-argocd.sh for the first install, and by the Argo CD
+# Application that lets Argo CD manage itself afterwards.
+
+configs:
+  cm:
+    # Default is 120s (+60s jitter). Lowered so demo releases are picked up
+    # quickly. See docs/DECISIONS/0003-argocd-reconciliation-interval.md.
+    timeout.reconciliation: 30s
+    timeout.reconciliation.jitter: 0s
+  params:
+    # TLS is terminated nowhere in this local setup; the UI is reached through
+    # a port-forward.
+    server.insecure: true
+
+# Components the case study does not use; off to keep the cluster lean.
+dex:
+  enabled: false
+notifications:
+  enabled: false
+applicationSet:
+  replicas: 0
