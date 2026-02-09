@@ -1,4 +1,4 @@
-module github.com/abhichandra-v/gitops-rollback-case-study/app
+module github.com/abhichandra-v/gitops-demo-app/app
 
 go 1.27
 
