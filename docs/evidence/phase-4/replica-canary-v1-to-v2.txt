@@ -1,0 +1,80 @@
+# 2026-10-13T10:51:17Z
+$ kubectl-argo-rollouts --context kind-gitops-rollback -n demo-dev get rollout demo-app --no-color
+Name:            demo-app
+Namespace:       demo-dev
+Status:          ✔ Healthy
+Strategy:        Canary
+  Step:          5/5
+  SetWeight:     100
+  ActualWeight:  100
+Images:          ghcr.io/abhichandra-v/gitops-demo-app:v1.0.0 (stable)
+Replicas:
+  Desired:       5
+  Current:       5
+  Updated:       5
+  Ready:         5
+  Available:     5
+
+NAME                                  KIND        STATUS     AGE  INFO
+⟳ demo-app                            Rollout     ✔ Healthy  28s  
+└──# revision:1                                                   
+   └──⧉ demo-app-86947d78d9           ReplicaSet  ✔ Healthy  28s  stable
+      ├──□ demo-app-86947d78d9-5rld4  Pod         ✔ Running  28s  ready:1/1
+      ├──□ demo-app-86947d78d9-h7xnm  Pod         ✔ Running  28s  ready:1/1
+      ├──□ demo-app-86947d78d9-k4frx  Pod         ✔ Running  28s  ready:1/1
+      ├──□ demo-app-86947d78d9-nhxwr  Pod         ✔ Running  28s  ready:1/1
+      └──□ demo-app-86947d78d9-v6bqj  Pod         ✔ Running  28s  ready:1/1
+
+# 2026-10-13T10:51:25Z
+$ git push origin main   (078ea6e chore(release): demo-app v2.0.0 in dev)
+$ T0=<push time> scripts/measure.sh --until 'Synced/Healthy.*phase=Healthy.*readyPods\[v2.0.0=5\]'
+2026-10-13T10:51:33Z  +   6s  argocd=Synced/Healthy@7ad260d  phase=Healthy step=5 weight= aborted= stable=86947d78d9 current=86947d78d9  readyPods[v1.0.0=5]
+2026-10-13T10:51:38Z  +  10s  argocd=OutOfSync/Healthy@078ea6e  phase=Healthy step=5 weight= aborted= stable=86947d78d9 current=86947d78d9  readyPods[v1.0.0=5]
+2026-10-13T10:51:43Z  +  15s  argocd=Synced/Progressing@078ea6e  phase=Paused step=1 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=4,v2.0.0=1]
+2026-10-13T10:51:47Z  +  20s  argocd=Synced/Suspended@078ea6e  phase=Paused step=1 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=4,v2.0.0=1]
+2026-10-13T10:51:52Z  +  25s  argocd=Synced/Suspended@078ea6e  phase=Paused step=1 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=4,v2.0.0=1]
+2026-10-13T10:51:56Z  +  29s  argocd=Synced/Suspended@078ea6e  phase=Paused step=1 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=4,v2.0.0=1]
+2026-10-13T10:52:00Z  +  33s  argocd=Synced/Suspended@078ea6e  phase=Paused step=1 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=4,v2.0.0=1]
+2026-10-13T10:52:05Z  +  37s  argocd=Synced/Suspended@078ea6e  phase=Paused step=1 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=4,v2.0.0=1]
+2026-10-13T10:52:09Z  +  42s  argocd=Synced/Suspended@078ea6e  phase=Paused step=1 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=4,v2.0.0=1]
+2026-10-13T10:52:15Z  +  47s  argocd=Synced/Progressing@078ea6e  phase=Progressing step=2 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=4,v2.0.0=2]
+2026-10-13T10:52:20Z  +  53s  argocd=Synced/Suspended@078ea6e  phase=Paused step=3 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=3,v2.0.0=3]
+2026-10-13T10:52:24Z  +  57s  argocd=Synced/Suspended@078ea6e  phase=Paused step=3 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=3,v2.0.0=3]
+2026-10-13T10:52:28Z  +  61s  argocd=Synced/Suspended@078ea6e  phase=Paused step=3 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=3,v2.0.0=3]
+2026-10-13T10:52:33Z  +  65s  argocd=Synced/Suspended@078ea6e  phase=Paused step=3 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=3,v2.0.0=3]
+2026-10-13T10:52:37Z  +  70s  argocd=Synced/Suspended@078ea6e  phase=Paused step=3 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=3,v2.0.0=3]
+2026-10-13T10:52:42Z  +  74s  argocd=Synced/Suspended@078ea6e  phase=Paused step=3 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=3,v2.0.0=3]
+2026-10-13T10:52:46Z  +  79s  argocd=Synced/Suspended@078ea6e  phase=Paused step=3 weight= aborted= stable=86947d78d9 current=6664ff96fb  readyPods[v1.0.0=3,v2.0.0=3]
+2026-10-13T10:52:51Z  +  83s  argocd=Synced/Progressing@078ea6e  phase=Healthy step=5 weight= aborted= stable=6664ff96fb current=6664ff96fb  readyPods[v1.0.0=0,v2.0.0=5]
+2026-10-13T10:52:55Z  +  88s  argocd=Synced/Healthy@078ea6e  phase=Healthy step=5 weight= aborted= stable=6664ff96fb current=6664ff96fb  readyPods[v2.0.0=5]
+2026-10-13T10:53:00Z  +  92s  argocd=Synced/Healthy@078ea6e  phase=Healthy step=5 weight= aborted= stable=6664ff96fb current=6664ff96fb  readyPods[v2.0.0=5]
+
+# 2026-10-13T10:53:00Z
+$ kubectl-argo-rollouts --context kind-gitops-rollback -n demo-dev get rollout demo-app --no-color
+Name:            demo-app
+Namespace:       demo-dev
+Status:          ✔ Healthy
+Strategy:        Canary
+  Step:          5/5
+  SetWeight:     100
+  ActualWeight:  100
+Images:          ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0 (stable)
+Replicas:
+  Desired:       5
+  Current:       5
+  Updated:       5
+  Ready:         5
+  Available:     5
+
+NAME                                  KIND        STATUS        AGE   INFO
+⟳ demo-app                            Rollout     ✔ Healthy     2m7s  
+├──# revision:2                                                       
+│  └──⧉ demo-app-6664ff96fb           ReplicaSet  ✔ Healthy     82s   stable
+│     ├──□ demo-app-6664ff96fb-vrt6r  Pod         ✔ Running     81s   ready:1/1
+│     ├──□ demo-app-6664ff96fb-8cs9p  Pod         ✔ Running     49s   ready:1/1
+│     ├──□ demo-app-6664ff96fb-fn7x5  Pod         ✔ Running     47s   ready:1/1
+│     ├──□ demo-app-6664ff96fb-skpxj  Pod         ✔ Running     14s   ready:1/1
+│     └──□ demo-app-6664ff96fb-fp7sw  Pod         ✔ Running     13s   ready:1/1
+└──# revision:1                                                       
+   └──⧉ demo-app-86947d78d9           ReplicaSet  • ScaledDown  2m7s  
+

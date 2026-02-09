@@ -46,7 +46,7 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 - [x] Stable and canary Services
 - [x] `dev` and `prod` overlays pinning image tag and replicas
 - [x] Argo CD `Application` for the demo app
-- [ ] Acceptance: healthy v1; tag bump to v2.0.0 via commit progresses to 100%; watch output saved with timestamps
+- [x] Acceptance: healthy v1; tag bump to v2.0.0 via commit progresses to 100%; watch output saved with timestamps
 
 ## Phase 5 — `feat/traffic-routing`
 
