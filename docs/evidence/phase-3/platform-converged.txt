@@ -1,0 +1,39 @@
+# 2026-10-13T10:47:04Z
+$ bash scripts/status.sh
+NAME                    SYNC     HEALTH    REVISION
+argo-rollouts           Synced   Healthy   <none>
+argocd                  Synced   Healthy   <none>
+ingress-nginx           Synced   Healthy   <none>
+kube-prometheus-stack   Synced   Healthy   <none>
+root                    Synced   Healthy   4fd88ef79ad52b4d767833ffa7b172ed4fd2c646
+
+# 2026-10-13T10:47:06Z
+$ kubectl --context kind-gitops-rollback -n argocd get applications.argoproj.io -o custom-columns='NAME:.metadata.name,WAVE:.metadata.annotations.argocd\.argoproj\.io/sync-wave,CHART:.spec.sources[0].chart,VERSION:.spec.sources[0].targetRevision,SYNCED-AT:.status.operationState.finishedAt'
+NAME                    WAVE     CHART                   VERSION   SYNCED-AT
+argo-rollouts           0        argo-rollouts           2.43.7    2026-10-13T10:43:27Z
+argocd                  -1       argo-cd                 10.10.3   2026-10-13T10:44:52Z
+ingress-nginx           1        ingress-nginx           4.15.1    2026-10-13T10:46:16Z
+kube-prometheus-stack   2        kube-prometheus-stack   92.3.0    2026-10-13T10:45:38Z
+root                    <none>   <none>                  <none>    2026-10-13T10:42:27Z
+
+# 2026-10-13T10:47:08Z
+$ kubectl --context kind-gitops-rollback get pods -A --field-selector metadata.namespace!=kube-system
+NAMESPACE            NAME                                        READY   STATUS    RESTARTS   AGE
+argo-rollouts        argo-rollouts-6757d9cbc9-8ncm2              1/1     Running   0          4m24s
+argo-rollouts        argo-rollouts-dashboard-5cd746bbbb-wwpxl    1/1     Running   0          4m24s
+argocd               argocd-application-controller-0             1/1     Running   0          2m10s
+argocd               argocd-redis-86f677dd5d-h9gwz               1/1     Running   0          71m
+argocd               argocd-repo-server-67655854f8-k2z4r         1/1     Running   0          2m17s
+argocd               argocd-server-9cb94f479-zg799               1/1     Running   0          2m17s
+ingress-nginx        ingress-nginx-controller-76b66d46bf-qlpgj   1/1     Running   0          4m
+local-path-storage   local-path-provisioner-56c4685b7c-grb57     1/1     Running   0          76m
+monitoring           kps-operator-8594f8bf45-s44zk               1/1     Running   0          3m10s
+monitoring           prometheus-kps-prometheus-0                 2/2     Running   0          90s
+
+# 2026-10-13T10:47:09Z
+$ kubectl --context kind-gitops-rollback get appprojects -n argocd
+NAME       AGE
+apps       5m9s
+default    71m
+platform   5m9s
+
