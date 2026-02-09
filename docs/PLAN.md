@@ -34,7 +34,7 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 - [x] Root `Application` in `bootstrap/root-app.yaml` pointing at `argocd/`
 - [x] `AppProject` restricting source repos and destination namespaces
 - [x] Argo CD manages itself
-- [ ] Argo Rollouts via Argo CD (Helm source, pinned, sync-wave)
+- [x] Argo Rollouts via Argo CD (Helm source, pinned, sync-wave)
 - [ ] ingress-nginx via Argo CD
 - [ ] kube-prometheus-stack via Argo CD (Alertmanager and Grafana off)
 - [ ] ADR for app-of-apps
