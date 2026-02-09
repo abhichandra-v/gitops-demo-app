@@ -1,0 +1,20 @@
+# Values for the ingress-nginx Helm chart, shaped for kind: the controller runs
+# on the node labelled ingress-ready (the control-plane) and binds host ports
+# 80/443, which bootstrap/kind-config.yaml maps to 127.0.0.1 on the host.
+controller:
+  hostPort:
+    enabled: true
+  service:
+    type: ClusterIP
+  nodeSelector:
+    ingress-ready: "true"
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
+      effect: NoSchedule
+  ingressClassResource:
+    default: true
+  watchIngressWithoutClass: true
+  # A rolling update cannot schedule a second pod on the same host ports.
+  updateStrategy:
+    type: Recreate
