@@ -1,0 +1,58 @@
+# Values for the kube-prometheus-stack Helm chart. Only what the canary
+# analysis needs: the operator and one Prometheus. Everything else is off to
+# keep the cluster inside about 6 GB.
+fullnameOverride: kps
+
+alertmanager:
+  enabled: false
+grafana:
+  enabled: false
+nodeExporter:
+  enabled: false
+kubeStateMetrics:
+  enabled: false
+defaultRules:
+  create: false
+
+# Control-plane scrape targets are not needed for app-level analysis, and most
+# are not reachable in kind anyway.
+kubeApiServer:
+  enabled: false
+kubelet:
+  enabled: false
+kubeControllerManager:
+  enabled: false
+coreDns:
+  enabled: false
+kubeEtcd:
+  enabled: false
+kubeScheduler:
+  enabled: false
+kubeProxy:
+  enabled: false
+
+prometheusOperator:
+  # The webhook certificates are created by Helm hook Jobs; skipping them keeps
+  # the Argo CD sync simple. Invalid rules are then only caught by the operator.
+  admissionWebhooks:
+    enabled: false
+  tls:
+    enabled: false
+
+prometheus:
+  prometheusSpec:
+    # Select PodMonitors/ServiceMonitors from every namespace regardless of
+    # Helm release labels, so the demo app's PodMonitor is picked up.
+    podMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelectorNilUsesHelmValues: false
+    ruleSelectorNilUsesHelmValues: false
+    probeSelectorNilUsesHelmValues: false
+    scrapeInterval: 10s
+    evaluationInterval: 10s
+    retention: 6h
+    resources:
+      requests:
+        cpu: 100m
+        memory: 400Mi
+      limits:
+        memory: 1Gi

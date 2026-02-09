@@ -1,0 +1,38 @@
+# Values for the argo-cd Helm chart. Used twice with identical content:
+# by bootstrap/install-argocd.sh for the first install, and by the Argo CD
+# Application (argocd/argocd.yaml) that lets Argo CD manage itself afterwards.
+
+configs:
+  cm:
+    # Default is 120s (+60s jitter). Lowered so demo releases are picked up
+    # quickly. See docs/DECISIONS/0003-argocd-reconciliation-interval.md.
+    timeout.reconciliation: 30s
+    timeout.reconciliation.jitter: 0s
+    # Argo CD does not assess the health of child Applications by default, so
+    # sync-waves between apps in an app-of-apps would not wait for each other.
+    # This restores the check: a wave is done only when its apps are Healthy.
+    resource.customizations.health.argoproj.io_Application: |
+      hs = {}
+      hs.status = "Progressing"
+      hs.message = ""
+      if obj.status ~= nil then
+        if obj.status.health ~= nil then
+          hs.status = obj.status.health.status
+          if obj.status.health.message ~= nil then
+            hs.message = obj.status.health.message
+          end
+        end
+      end
+      return hs
+  params:
+    # TLS is terminated nowhere in this local setup; the UI is reached through
+    # a port-forward.
+    server.insecure: true
+
+# Components the case study does not use; off to keep the cluster lean.
+dex:
+  enabled: false
+notifications:
+  enabled: false
+applicationSet:
+  replicas: 0

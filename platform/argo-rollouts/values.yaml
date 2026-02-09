@@ -1,0 +1,5 @@
+# Values for the argo-rollouts Helm chart.
+dashboard:
+  enabled: true
+controller:
+  replicas: 1

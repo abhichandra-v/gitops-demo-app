@@ -6,7 +6,7 @@ delay would dominate every measurement. No webhook can reach a local kind
 cluster from GitHub.
 
 **Decision.** `timeout.reconciliation: 30s` and `timeout.reconciliation.jitter:
-0s` in `argocd-cm` (see `platform/argocd/values.yaml`). Dex, notifications and
+0s` in `argocd-cm` (see `platform/argo-cd/values.yaml`). Dex, notifications and
 the ApplicationSet controller are switched off because nothing here uses them.
 `server.insecure: true` because the UI is only reached through a local
 port-forward.
