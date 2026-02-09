@@ -4,7 +4,7 @@ SHELL := bash
 include versions.env
 export
 
-.PHONY: help doctor images cluster-up cluster-down bootstrap argocd-ui status
+.PHONY: help doctor images cluster-up cluster-down bootstrap argocd-ui status check
 
 help: ## List targets
 	@grep -E '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{printf "  %-16s %s\n", $$1, $$2}'
@@ -30,3 +30,6 @@ argocd-ui: ## Port-forward the Argo CD UI to localhost
 
 status: ## Show sync/health of all Argo CD applications
 	@bash scripts/status.sh
+
+check: ## Static checks for platform charts and pinned versions
+	@bash scripts/check-platform.sh

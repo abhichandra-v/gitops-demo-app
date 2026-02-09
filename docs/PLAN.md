@@ -36,7 +36,7 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 - [x] Argo CD manages itself
 - [x] Argo Rollouts via Argo CD (Helm source, pinned, sync-wave)
 - [x] ingress-nginx via Argo CD
-- [ ] kube-prometheus-stack via Argo CD (Alertmanager and Grafana off)
+- [x] kube-prometheus-stack via Argo CD (Alertmanager and Grafana off)
 - [ ] ADR for app-of-apps
 - [ ] Acceptance: one `make bootstrap` converges to Synced/Healthy from Git only; self-heal of a deleted platform resource captured as evidence
 
