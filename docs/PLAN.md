@@ -42,10 +42,10 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 
 ## Phase 4 — `feat/rollout-canary`
 
-- [ ] `Rollout` with canary steps (`setWeight 20 → pause 30s → setWeight 50 → pause 30s → setWeight 100`)
-- [ ] Stable and canary Services
-- [ ] `dev` and `prod` overlays pinning image tag and replicas
-- [ ] Argo CD `Application` for the demo app
+- [x] `Rollout` with canary steps (`setWeight 20 → pause 30s → setWeight 50 → pause 30s → setWeight 100`)
+- [x] Stable and canary Services
+- [x] `dev` and `prod` overlays pinning image tag and replicas
+- [x] Argo CD `Application` for the demo app
 - [ ] Acceptance: healthy v1; tag bump to v2.0.0 via commit progresses to 100%; watch output saved with timestamps
 
 ## Phase 5 — `feat/traffic-routing`

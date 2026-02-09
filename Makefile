@@ -4,7 +4,7 @@ SHELL := bash
 include versions.env
 export
 
-.PHONY: help doctor images cluster-up cluster-down bootstrap argocd-ui status check
+.PHONY: help doctor images cluster-up cluster-down bootstrap argocd-ui status check load-images
 
 help: ## List targets
 	@grep -E '^[a-zA-Z_-]+:.*## ' $(MAKEFILE_LIST) | awk -F ':.*## ' '{printf "  %-16s %s\n", $$1, $$2}'
@@ -14,6 +14,9 @@ doctor: ## Check local prerequisites (installs nothing)
 
 images: ## Build the three demo app release images locally
 	@bash scripts/build-images.sh
+
+load-images: ## Load the release images into the kind nodes (GHCR fallback)
+	@bash scripts/load-images.sh
 
 cluster-up: ## Create the kind cluster
 	@bash scripts/cluster-up.sh
