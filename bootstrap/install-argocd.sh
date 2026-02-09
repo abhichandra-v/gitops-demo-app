@@ -10,7 +10,7 @@ helm upgrade --install argocd argo-cd \
   --version "${ARGOCD_CHART_VERSION}" \
   --kube-context "${KUBE_CONTEXT}" \
   --namespace "${ARGOCD_NAMESPACE}" --create-namespace \
-  --values "${REPO_ROOT}/platform/argocd/values.yaml" \
+  --values "${REPO_ROOT}/platform/argo-cd/values.yaml" \
   --wait --timeout 10m
 
 k -n "${ARGOCD_NAMESPACE}" get pods

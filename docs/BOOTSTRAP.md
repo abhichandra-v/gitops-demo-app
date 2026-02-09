@@ -31,7 +31,7 @@ make bootstrap
 
 Runs [`bootstrap/install-argocd.sh`](../bootstrap/install-argocd.sh): a
 `helm upgrade --install` of the official `argo-cd` chart at the pinned version
-with [`platform/argocd/values.yaml`](../platform/argocd/values.yaml).
+with [`platform/argo-cd/values.yaml`](../platform/argo-cd/values.yaml).
 
 ## 4. Open the UI
 

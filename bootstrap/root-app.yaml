@@ -1,0 +1,25 @@
+# App-of-apps root. Applied once by `make bootstrap`; from then on every
+# Application and AppProject in argocd/ is created, changed and pruned by a
+# Git commit.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: platform
+  source:
+    repoURL: https://github.com/abhichandra-v/gitops-demo-app.git
+    targetRevision: main
+    path: argocd
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
