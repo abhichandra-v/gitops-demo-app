@@ -10,6 +10,8 @@ spec:
       app.kubernetes.io/name: demo-app
   strategy:
     canary:
+      stableService: demo-app-stable
+      canaryService: demo-app-canary
       # Replica-based canary: with no traffic router the weight is approximated
       # by the ratio of canary to stable pods behind the same Service.
       maxSurge: 1
