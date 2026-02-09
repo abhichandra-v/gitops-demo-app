@@ -1,0 +1,30 @@
+# 2026-10-13T10:47:10Z
+$ kubectl --context kind-gitops-rollback -n argo-rollouts get deploy
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+argo-rollouts             1/1     1            1           4m28s
+argo-rollouts-dashboard   1/1     1            1           4m28s
+
+# 2026-10-13T10:47:11Z
+$ kubectl --context kind-gitops-rollback -n argo-rollouts delete deploy argo-rollouts argo-rollouts-dashboard
+deployment.apps "argo-rollouts" deleted from argo-rollouts namespace
+deployment.apps "argo-rollouts-dashboard" deleted from argo-rollouts namespace
+
+2026-10-13T10:47:14Z +3s  app=Synced/Healthy  argo-rollouts availableReplicas=<absent>
+2026-10-13T10:47:17Z +6s  app=Synced/Progressing  argo-rollouts availableReplicas=<absent>
+2026-10-13T10:47:20Z +9s  app=Synced/Progressing  argo-rollouts availableReplicas=1
+2026-10-13T10:47:23Z +12s  app=Synced/Progressing  argo-rollouts availableReplicas=1
+2026-10-13T10:47:26Z +16s  app=Synced/Progressing  argo-rollouts availableReplicas=1
+2026-10-13T10:47:30Z +19s  app=Synced/Progressing  argo-rollouts availableReplicas=1
+2026-10-13T10:47:33Z +22s  app=Synced/Progressing  argo-rollouts availableReplicas=1
+2026-10-13T10:47:36Z +25s  app=Synced/Healthy  argo-rollouts availableReplicas=1
+
+# 2026-10-13T10:47:37Z
+$ kubectl --context kind-gitops-rollback -n argo-rollouts get deploy
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+argo-rollouts             1/1     1            1           22s
+argo-rollouts-dashboard   1/1     1            1           22s
+
+# 2026-10-13T10:47:38Z
+$ kubectl --context kind-gitops-rollback -n argocd get application argo-rollouts -o jsonpath='{range .status.history[*]}{.deployedAt}  initiatedBy.automated={.initiatedBy.automated}{"\n"}{end}'
+2026-10-13T10:42:43Z  initiatedBy.automated=true
+

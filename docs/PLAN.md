@@ -38,7 +38,7 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 - [x] ingress-nginx via Argo CD
 - [x] kube-prometheus-stack via Argo CD (Alertmanager and Grafana off)
 - [x] ADR for app-of-apps
-- [ ] Acceptance: one `make bootstrap` converges to Synced/Healthy from Git only; self-heal of a deleted platform resource captured as evidence
+- [x] Acceptance: one `make bootstrap` converges to Synced/Healthy from Git only; self-heal of a deleted platform resource captured as evidence
 
 ## Phase 4 — `feat/rollout-canary`
 
