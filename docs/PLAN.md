@@ -50,9 +50,9 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 
 ## Phase 5 — `feat/traffic-routing`
 
-- [ ] Ingress for the demo app
-- [ ] NGINX traffic routing on the Rollout
-- [ ] In-cluster load generator
+- [x] Ingress for the demo app
+- [x] NGINX traffic routing on the Rollout
+- [x] In-cluster load generator
 - [ ] Acceptance: measured traffic split at the 20% step recorded
 
 ## Phase 6 — `feat/analysis-automated-rollback` → tag `v0.5.0`

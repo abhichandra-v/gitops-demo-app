@@ -1,0 +1,34 @@
+# Constant background traffic through the ingress, so Prometheus always has
+# requests to analyse and the canary receives its weighted share.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loadgen
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: loadgen
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: loadgen
+    spec:
+      containers:
+        - name: fortio
+          image: fortio/fortio:1.76.0
+          args:
+            - load
+            - -qps=20
+            - -c=4
+            - -t=0
+            - -quiet
+            - -allow-initial-errors
+            - -H=Host: demo.localtest.me
+            - http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/
+          resources:
+            requests:
+              cpu: 20m
+              memory: 32Mi
+            limits:
+              memory: 128Mi
