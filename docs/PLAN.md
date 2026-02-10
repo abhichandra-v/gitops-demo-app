@@ -57,9 +57,9 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 
 ## Phase 6 — `feat/analysis-automated-rollback` → tag `v0.5.0`
 
-- [ ] Prometheus success-rate `AnalysisTemplate` (≥ 0.95, no-data does not pass)
-- [ ] `PodMonitor` carrying the `rollouts-pod-template-hash` label
-- [ ] Canary steps gated on analysis
+- [x] Prometheus success-rate `AnalysisTemplate` (≥ 0.95, no-data does not pass)
+- [x] `PodMonitor` carrying the `rollouts-pod-template-hash` label
+- [x] Canary steps gated on analysis
 - [ ] Analysis tuning decisions recorded
 - [ ] Acceptance: v2 passes and promotes; `v3.0.0-bad` fails analysis and aborts automatically; both runs captured
 

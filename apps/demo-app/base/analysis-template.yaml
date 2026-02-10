@@ -1,0 +1,33 @@
+# Success rate of the canary pods only, measured by Prometheus.
+# The pod-hash argument is the rollouts-pod-template-hash of the ReplicaSet
+# under test; the PodMonitor copies that pod label onto every scraped series.
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: success-rate
+spec:
+  args:
+    - name: pod-hash
+  metrics:
+    - name: success-rate
+      # Give the canary time to receive traffic and be scraped twice before
+      # the first measurement.
+      initialDelay: 30s
+      interval: 15s
+      count: 4
+      # One bad measurement is tolerated; the second fails the analysis.
+      failureLimit: 1
+      # A query error (for example Prometheus unreachable) is not a pass
+      # either: after this many consecutive errors the run ends as Error,
+      # which also aborts the rollout.
+      consecutiveErrorLimit: 2
+      # No data must never pass: an empty result (no series for this hash) and
+      # NaN (series exist but no requests in the window) both fail.
+      successCondition: len(result) > 0 && !isNaN(result[0]) && result[0] >= 0.95
+      provider:
+        prometheus:
+          address: http://kps-prometheus.monitoring.svc.cluster.local:9090
+          query: |
+            sum(rate(http_requests_total{rollouts_pod_template_hash="{{args.pod-hash}}",code!~"5.."}[1m]))
+            /
+            sum(rate(http_requests_total{rollouts_pod_template_hash="{{args.pod-hash}}"}[1m]))
