@@ -1,0 +1,24 @@
+# 2026-10-13T11:02:47Z
+$ scripts/measure-split.sh 1 200 6 3
+2026-10-13T11:02:48Z  waiting for rollout to pause at step 1
+2026-10-13T11:03:50Z  rollout is Paused/1; setWeight=20
+  ingress demo-app  canary= canary-weight=
+  ingress demo-app-demo-app-canary  canary=true canary-weight=20
+2026-10-13T11:03:52Z  sample 1  + 1s after pause  200 requests:  v1.0.0=145 (72.5%)  v2.0.0=55 (27.5%)    rollout=Paused/1
+2026-10-13T11:03:56Z  sample 2  + 5s after pause  200 requests:  v1.0.0=158 (79.0%)  v2.0.0=42 (21.0%)    rollout=Paused/1
+2026-10-13T11:04:03Z  sample 3  +10s after pause  200 requests:  v1.0.0=155 (77.5%)  v2.0.0=45 (22.5%)    rollout=Paused/1
+2026-10-13T11:04:11Z  sample 4  +18s after pause  200 requests:  v1.0.0=159 (79.5%)  v2.0.0=41 (20.5%)    rollout=Paused/1
+2026-10-13T11:04:20Z  sample 5  +25s after pause  200 requests:  v1.0.0=162 (81.0%)  v2.0.0=38 (19.0%)    rollout=Progressing/2
+2026-10-13T11:04:24Z  sample 6  +33s after pause  200 requests:  v1.0.0=168 (84.0%)  v2.0.0=32 (16.0%)    rollout=Paused/3
+
+$ scripts/measure-split.sh 3 200 6 3
+2026-10-13T11:04:28Z  waiting for rollout to pause at step 3
+2026-10-13T11:04:29Z  rollout is Paused/3; setWeight=50
+  ingress demo-app  canary= canary-weight=
+  ingress demo-app-demo-app-canary  canary=true canary-weight=50
+2026-10-13T11:04:31Z  sample 1  + 1s after pause  200 requests:  v1.0.0=103 (51.5%)  v2.0.0=97 (48.5%)    rollout=Paused/3
+2026-10-13T11:04:39Z  sample 2  + 6s after pause  200 requests:  v1.0.0=88 (44.0%)  v2.0.0=112 (56.0%)    rollout=Paused/3
+2026-10-13T11:04:44Z  sample 3  +13s after pause  200 requests:  v1.0.0=99 (49.5%)  v2.0.0=101 (50.5%)    rollout=Paused/3
+2026-10-13T11:04:50Z  sample 4  +19s after pause  200 requests:  v1.0.0=93 (46.5%)  v2.0.0=107 (53.5%)    rollout=Progressing/4
+2026-10-13T11:04:55Z  sample 5  +24s after pause  200 requests:  v1.0.0=118 (59.0%)  v2.0.0=82 (41.0%)    rollout=Healthy/5
+2026-10-13T11:05:00Z  sample 6  +30s after pause  200 requests:  v2.0.0=200 (100.0%)    rollout=Healthy/5
