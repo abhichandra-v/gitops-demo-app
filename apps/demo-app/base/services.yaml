@@ -23,17 +23,3 @@ spec:
     - name: http
       port: 80
       targetPort: http
----
-# Selects every demo-app pod, stable and canary alike. This is what a client
-# hits while the canary is replica-based.
-apiVersion: v1
-kind: Service
-metadata:
-  name: demo-app
-spec:
-  selector:
-    app.kubernetes.io/name: demo-app
-  ports:
-    - name: http
-      port: 80
-      targetPort: http
