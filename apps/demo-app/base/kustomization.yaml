@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - rollout.yaml
   - services.yaml
+  - ingress.yaml
 labels:
   - pairs:
       app.kubernetes.io/part-of: demo-app
