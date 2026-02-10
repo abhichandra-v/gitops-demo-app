@@ -12,8 +12,11 @@ spec:
     canary:
       stableService: demo-app-stable
       canaryService: demo-app-canary
-      # Replica-based canary: with no traffic router the weight is approximated
-      # by the ratio of canary to stable pods behind the same Service.
+      # ingress-nginx splits traffic by weight: Argo Rollouts creates a canary
+      # Ingress next to the stable one and sets its canary-weight annotation.
+      trafficRouting:
+        nginx:
+          stableIngress: demo-app
       maxSurge: 1
       maxUnavailable: 0
       steps:

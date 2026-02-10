@@ -1,0 +1,19 @@
+# demo.localtest.me resolves to 127.0.0.1, so http://demo.localtest.me works
+# from the host through the kind port mapping without editing /etc/hosts.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: demo-app
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: demo.localtest.me
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: demo-app-stable
+                port:
+                  name: http
