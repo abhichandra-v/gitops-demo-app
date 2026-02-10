@@ -5,6 +5,7 @@ resources:
   - services.yaml
   - ingress.yaml
   - loadgen.yaml
+  - analysis-template.yaml
 labels:
   - pairs:
       app.kubernetes.io/part-of: demo-app
