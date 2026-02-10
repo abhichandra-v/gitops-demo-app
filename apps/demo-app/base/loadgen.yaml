@@ -24,7 +24,7 @@ spec:
             - -t=0
             - -quiet
             - -allow-initial-errors
-            - -H=Host: demo.localtest.me
+            - "-H=Host: demo.localtest.me"
             - http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/
           resources:
             requests:
