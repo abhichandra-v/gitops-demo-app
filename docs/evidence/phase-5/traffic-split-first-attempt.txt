@@ -1,0 +1,21 @@
+# 2026-10-13T11:00:17Z
+$ scripts/measure-split.sh 1 500
+2026-10-13T11:00:18Z  waiting for rollout to pause at step 1
+2026-10-13T11:00:43Z  rollout is Paused/1; setWeight=20
+2026-10-13T11:00:43Z  canary ingress annotations:
+demo-app  canary= weight=
+demo-app-demo-app-canary  canary=true weight=20
+2026-10-13T11:00:44Z  sending 500 requests to http://localhost/ with Host: demo.localtest.me
+    500  "version":"v2.0.0"     100.0%
+2026-10-13T11:00:46Z  rollout after sampling: Paused/1
+
+$ scripts/measure-split.sh 3 500
+2026-10-13T11:00:47Z  waiting for rollout to pause at step 3
+2026-10-13T11:01:15Z  rollout is Paused/3; setWeight=50
+2026-10-13T11:01:16Z  canary ingress annotations:
+demo-app  canary= weight=
+demo-app-demo-app-canary  canary=true weight=50
+2026-10-13T11:01:17Z  sending 500 requests to http://localhost/ with Host: demo.localtest.me
+    217  "version":"v1.0.0"      43.4%
+    283  "version":"v2.0.0"      56.6%
+2026-10-13T11:01:20Z  rollout after sampling: Paused/3
