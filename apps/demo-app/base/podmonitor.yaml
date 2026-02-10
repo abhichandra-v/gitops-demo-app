@@ -1,0 +1,17 @@
+# Scrapes every demo-app pod and copies its rollouts-pod-template-hash label
+# onto the series (as rollouts_pod_template_hash), which is what lets a query
+# tell canary pods from stable pods.
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: demo-app
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: demo-app
+  podTargetLabels:
+    - rollouts-pod-template-hash
+  podMetricsEndpoints:
+    - port: http
+      path: /metrics
+      interval: 5s

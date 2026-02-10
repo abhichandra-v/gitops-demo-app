@@ -6,6 +6,7 @@ resources:
   - ingress.yaml
   - loadgen.yaml
   - analysis-template.yaml
+  - podmonitor.yaml
 labels:
   - pairs:
       app.kubernetes.io/part-of: demo-app
