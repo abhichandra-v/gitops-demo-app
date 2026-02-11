@@ -4,6 +4,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: loadgen
+  annotations:
+    # `fortio load` is a client with no listening port and the image has no
+    # shell, so there is nothing for a probe to call.
+    kube-score/ignore: pod-probes
+    checkov.io/skip1: CKV_K8S_8=fortio load exposes no endpoint to probe
+    checkov.io/skip2: CKV_K8S_9=fortio load exposes no endpoint to probe
 spec:
   replicas: 1
   selector:
@@ -14,6 +20,13 @@ spec:
       labels:
         app.kubernetes.io/name: loadgen
     spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        seccompProfile:
+          type: RuntimeDefault
       containers:
         - name: fortio
           image: fortio/fortio:1.76.0
@@ -26,9 +39,17 @@ spec:
             - -allow-initial-errors
             - "-H=Host: demo.localtest.me"
             - http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
           resources:
             requests:
               cpu: 20m
               memory: 32Mi
+              ephemeral-storage: 16Mi
             limits:
+              cpu: 200m
               memory: 128Mi
+              ephemeral-storage: 64Mi

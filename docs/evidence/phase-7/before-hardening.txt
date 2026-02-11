@@ -1,0 +1,331 @@
+# 2026-10-13T11:32:38Z  before hardening
+$ scripts/validate.sh kube-score
+rendered apps/demo-app/overlays/dev/ -> rendered/overlays/demo-app-dev.yaml
+rendered apps/demo-app/overlays/prod/ -> rendered/overlays/demo-app-prod.yaml
+apps/v1/Deployment demo-app in demo-dev                                       💥
+    path=C:\Users\PC\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\scratch-workspaces\c6c35fb1-30e9-48e4-b21e-afc25bbed8eb\3f704822-c466-4f25-b8a8-a72d529f3d7e\scratch-2026-10-13-1444da\rendered\scoring\demo-app-dev.yaml
+    [CRITICAL] Container Security Context ReadOnlyRootFilesystem
+        · demo-app -> Container has no configured security context
+            Set securityContext to run the container in a more secure context.
+    [CRITICAL] Container Resources
+        · demo-app -> CPU limit is not set
+            Resource limits are recommended to avoid resource DDOS. Set
+            resources.limits.cpu
+    [CRITICAL] Container Ephemeral Storage Request and Limit
+        · demo-app -> Ephemeral Storage limit is not set
+            Resource limits are recommended to avoid resource DDOS. Set
+            resources.limits.ephemeral-storage
+        · demo-app -> Ephemeral Storage request is not set
+            Resource requests are recommended to make sure the application can
+            start and run without crashing. Set
+            resource.requests.ephemeral-storage
+    [OK] Pod Probes
+        · Container is missing a livenessProbe
+            A livenessProbe can be used to restart the container if it's
+            deadlocked or has crashed without exiting. It's only recommended to
+            setup a livenessProbe if you really need one.
+            More information: https://github.com/zegl/kube-score/blob/master/README_PROBES.md
+    [CRITICAL] Container Security Context User Group ID
+        · demo-app -> Container has no configured security context
+            Set securityContext to run the container in a more secure context.
+    [CRITICAL] Deployment has PodDisruptionBudget
+        · No matching PodDisruptionBudget was found
+            It's recommended to define a PodDisruptionBudget to avoid
+            unexpected downtime during Kubernetes maintenance operations, such
+            as when draining a node.
+    [WARNING] Deployment has host PodAntiAffinity
+        · Deployment does not have a host podAntiAffinity set
+            It's recommended to set a podAntiAffinity that stops multiple pods
+            from a deployment from being scheduled on the same node. This
+            increases availability in case the node becomes unavailable.
+apps/v1/Deployment loadgen in demo-dev                                        💥
+    path=C:\Users\PC\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\scratch-workspaces\c6c35fb1-30e9-48e4-b21e-afc25bbed8eb\3f704822-c466-4f25-b8a8-a72d529f3d7e\scratch-2026-10-13-1444da\rendered\scoring\demo-app-dev.yaml
+    [CRITICAL] Container Resources
+        · fortio -> CPU limit is not set
+            Resource limits are recommended to avoid resource DDOS. Set
+            resources.limits.cpu
+    [CRITICAL] Container Security Context ReadOnlyRootFilesystem
+        · fortio -> Container has no configured security context
+            Set securityContext to run the container in a more secure context.
+    [CRITICAL] Container Ephemeral Storage Request and Limit
+        · fortio -> Ephemeral Storage limit is not set
+            Resource limits are recommended to avoid resource DDOS. Set
+            resources.limits.ephemeral-storage
+        · fortio -> Ephemeral Storage request is not set
+            Resource requests are recommended to make sure the application can
+            start and run without crashing. Set
+            resource.requests.ephemeral-storage
+    [CRITICAL] Container Security Context User Group ID
+        · fortio -> Container has no configured security context
+            Set securityContext to run the container in a more secure context.
+apps/v1/Deployment demo-app in demo-prod                                      💥
+    path=C:\Users\PC\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\scratch-workspaces\c6c35fb1-30e9-48e4-b21e-afc25bbed8eb\3f704822-c466-4f25-b8a8-a72d529f3d7e\scratch-2026-10-13-1444da\rendered\scoring\demo-app-prod.yaml
+    [CRITICAL] Container Resources
+        · demo-app -> CPU limit is not set
+            Resource limits are recommended to avoid resource DDOS. Set
+            resources.limits.cpu
+    [CRITICAL] Container Security Context ReadOnlyRootFilesystem
+        · demo-app -> Container has no configured security context
+            Set securityContext to run the container in a more secure context.
+    [CRITICAL] Container Ephemeral Storage Request and Limit
+        · demo-app -> Ephemeral Storage limit is not set
+            Resource limits are recommended to avoid resource DDOS. Set
+            resources.limits.ephemeral-storage
+        · demo-app -> Ephemeral Storage request is not set
+            Resource requests are recommended to make sure the application can
+            start and run without crashing. Set
+            resource.requests.ephemeral-storage
+    [OK] Pod Probes
+        · Container is missing a livenessProbe
+            A livenessProbe can be used to restart the container if it's
+            deadlocked or has crashed without exiting. It's only recommended to
+            setup a livenessProbe if you really need one.
+            More information: https://github.com/zegl/kube-score/blob/master/README_PROBES.md
+    [CRITICAL] Container Security Context User Group ID
+        · demo-app -> Container has no configured security context
+            Set securityContext to run the container in a more secure context.
+    [CRITICAL] Deployment has PodDisruptionBudget
+        · No matching PodDisruptionBudget was found
+            It's recommended to define a PodDisruptionBudget to avoid
+            unexpected downtime during Kubernetes maintenance operations, such
+            as when draining a node.
+    [WARNING] Deployment has host PodAntiAffinity
+        · Deployment does not have a host podAntiAffinity set
+            It's recommended to set a podAntiAffinity that stops multiple pods
+            from a deployment from being scheduled on the same node. This
+            increases availability in case the node becomes unavailable.
+apps/v1/Deployment loadgen in demo-prod                                       💥
+    path=C:\Users\PC\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\scratch-workspaces\c6c35fb1-30e9-48e4-b21e-afc25bbed8eb\3f704822-c466-4f25-b8a8-a72d529f3d7e\scratch-2026-10-13-1444da\rendered\scoring\demo-app-prod.yaml
+    [CRITICAL] Container Ephemeral Storage Request and Limit
+        · fortio -> Ephemeral Storage limit is not set
+            Resource limits are recommended to avoid resource DDOS. Set
+            resources.limits.ephemeral-storage
+        · fortio -> Ephemeral Storage request is not set
+            Resource requests are recommended to make sure the application can
+            start and run without crashing. Set
+            resource.requests.ephemeral-storage
+    [CRITICAL] Container Security Context User Group ID
+        · fortio -> Container has no configured security context
+            Set securityContext to run the container in a more secure context.
+    [CRITICAL] Container Resources
+        · fortio -> CPU limit is not set
+            Resource limits are recommended to avoid resource DDOS. Set
+            resources.limits.cpu
+    [CRITICAL] Container Security Context ReadOnlyRootFilesystem
+        · fortio -> Container has no configured security context
+            Set securityContext to run the container in a more secure context.
+networking.k8s.io/v1/Ingress demo-app in demo-dev                             ✅
+networking.k8s.io/v1/Ingress demo-app in demo-prod                            ✅
+v1/Service demo-app-canary in demo-dev                                        ✅
+v1/Service demo-app-stable in demo-dev                                        ✅
+v1/Service demo-app-canary in demo-prod                                       ✅
+v1/Service demo-app-stable in demo-prod                                       ✅
+
+$ scripts/validate.sh checkov
+rendered apps/demo-app/overlays/dev/ -> rendered/overlays/demo-app-dev.yaml
+rendered apps/demo-app/overlays/prod/ -> rendered/overlays/demo-app-prod.yaml
+kubernetes scan results:
+
+Passed checks: 306, Failed checks: 50, Skipped checks: 0
+
+Check: CKV_K8S_29: "Apply security context to your pods and containers"
+	FAILED for resource: Deployment.demo-dev.loadgen
+	File: /rendered/scoring/demo-app-dev.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/ensure-securitycontext-is-applied-to-pods-and-containers
+Check: CKV_K8S_23: "Minimize the admission of root containers"
+	FAILED for resource: Deployment.demo-dev.loadgen
+	File: /rendered/scoring/demo-app-dev.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-22
+Check: CKV_K8S_11: "CPU limits should be set"
+	FAILED for resource: Deployment.demo-dev.loadgen
+	File: /rendered/scoring/demo-app-dev.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-10
+Check: CKV_K8S_8: "Liveness Probe Should be Configured"
+	FAILED for resource: Deployment.demo-dev.loadgen
+	File: /rendered/scoring/demo-app-dev.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-7
+Check: CKV_K8S_37: "Minimize the admission of containers with capabilities assigned"
+	FAILED for resource: Deployment.demo-dev.loadgen
+	File: /rendered/scoring/demo-app-dev.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-34
+Check: CKV_K8S_38: "Ensure that Service Account Tokens are only mounted where necessary"
+	FAILED for resource: Deployment.demo-dev.loadgen
+	File: /rendered/scoring/demo-app-dev.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-35
+Check: CKV_K8S_22: "Use read-only filesystem for containers where possible"
+	FAILED for resource: Deployment.demo-dev.loadgen
+	File: /rendered/scoring/demo-app-dev.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-21
+Check: CKV_K8S_9: "Readiness Probe Should be Configured"
+	FAILED for resource: Deployment.demo-dev.loadgen
+	File: /rendered/scoring/demo-app-dev.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-8
+Check: CKV_K8S_40: "Containers should run as a high UID to avoid host conflict"
+	FAILED for resource: Deployment.demo-dev.loadgen
+	File: /rendered/scoring/demo-app-dev.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-37
+Check: CKV_K8S_31: "Ensure that the seccomp profile is set to docker/default or runtime/default"
+	FAILED for resource: Deployment.demo-dev.loadgen
+	File: /rendered/scoring/demo-app-dev.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-29
+Check: CKV_K8S_28: "Minimize the admission of containers with the NET_RAW capability"
+	FAILED for resource: Deployment.demo-dev.loadgen
+	File: /rendered/scoring/demo-app-dev.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-27
+Check: CKV_K8S_20: "Containers should not run with allowPrivilegeEscalation"
+	FAILED for resource: Deployment.demo-dev.loadgen
+	File: /rendered/scoring/demo-app-dev.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-19
+Check: CKV_K8S_30: "Apply security context to your containers"
+	FAILED for resource: Deployment.demo-dev.loadgen
+	File: /rendered/scoring/demo-app-dev.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-28
+Check: CKV_K8S_29: "Apply security context to your pods and containers"
+	FAILED for resource: Deployment.demo-dev.demo-app
+	File: /rendered/scoring/demo-app-dev.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/ensure-securitycontext-is-applied-to-pods-and-containers
+Check: CKV_K8S_23: "Minimize the admission of root containers"
+	FAILED for resource: Deployment.demo-dev.demo-app
+	File: /rendered/scoring/demo-app-dev.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-22
+Check: CKV_K8S_11: "CPU limits should be set"
+	FAILED for resource: Deployment.demo-dev.demo-app
+	File: /rendered/scoring/demo-app-dev.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-10
+Check: CKV_K8S_8: "Liveness Probe Should be Configured"
+	FAILED for resource: Deployment.demo-dev.demo-app
+	File: /rendered/scoring/demo-app-dev.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-7
+Check: CKV_K8S_37: "Minimize the admission of containers with capabilities assigned"
+	FAILED for resource: Deployment.demo-dev.demo-app
+	File: /rendered/scoring/demo-app-dev.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-34
+Check: CKV_K8S_38: "Ensure that Service Account Tokens are only mounted where necessary"
+	FAILED for resource: Deployment.demo-dev.demo-app
+	File: /rendered/scoring/demo-app-dev.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-35
+Check: CKV_K8S_22: "Use read-only filesystem for containers where possible"
+	FAILED for resource: Deployment.demo-dev.demo-app
+	File: /rendered/scoring/demo-app-dev.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-21
+Check: CKV_K8S_40: "Containers should run as a high UID to avoid host conflict"
+	FAILED for resource: Deployment.demo-dev.demo-app
+	File: /rendered/scoring/demo-app-dev.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-37
+Check: CKV_K8S_31: "Ensure that the seccomp profile is set to docker/default or runtime/default"
+	FAILED for resource: Deployment.demo-dev.demo-app
+	File: /rendered/scoring/demo-app-dev.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-29
+Check: CKV_K8S_28: "Minimize the admission of containers with the NET_RAW capability"
+	FAILED for resource: Deployment.demo-dev.demo-app
+	File: /rendered/scoring/demo-app-dev.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-27
+Check: CKV_K8S_20: "Containers should not run with allowPrivilegeEscalation"
+	FAILED for resource: Deployment.demo-dev.demo-app
+	File: /rendered/scoring/demo-app-dev.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-19
+Check: CKV_K8S_30: "Apply security context to your containers"
+	FAILED for resource: Deployment.demo-dev.demo-app
+	File: /rendered/scoring/demo-app-dev.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-28
+Check: CKV_K8S_29: "Apply security context to your pods and containers"
+	FAILED for resource: Deployment.demo-prod.loadgen
+	File: /rendered/scoring/demo-app-prod.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/ensure-securitycontext-is-applied-to-pods-and-containers
+Check: CKV_K8S_23: "Minimize the admission of root containers"
+	FAILED for resource: Deployment.demo-prod.loadgen
+	File: /rendered/scoring/demo-app-prod.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-22
+Check: CKV_K8S_11: "CPU limits should be set"
+	FAILED for resource: Deployment.demo-prod.loadgen
+	File: /rendered/scoring/demo-app-prod.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-10
+Check: CKV_K8S_8: "Liveness Probe Should be Configured"
+	FAILED for resource: Deployment.demo-prod.loadgen
+	File: /rendered/scoring/demo-app-prod.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-7
+Check: CKV_K8S_37: "Minimize the admission of containers with capabilities assigned"
+	FAILED for resource: Deployment.demo-prod.loadgen
+	File: /rendered/scoring/demo-app-prod.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-34
+Check: CKV_K8S_38: "Ensure that Service Account Tokens are only mounted where necessary"
+	FAILED for resource: Deployment.demo-prod.loadgen
+	File: /rendered/scoring/demo-app-prod.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-35
+Check: CKV_K8S_22: "Use read-only filesystem for containers where possible"
+	FAILED for resource: Deployment.demo-prod.loadgen
+	File: /rendered/scoring/demo-app-prod.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-21
+Check: CKV_K8S_9: "Readiness Probe Should be Configured"
+	FAILED for resource: Deployment.demo-prod.loadgen
+	File: /rendered/scoring/demo-app-prod.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-8
+Check: CKV_K8S_40: "Containers should run as a high UID to avoid host conflict"
+	FAILED for resource: Deployment.demo-prod.loadgen
+	File: /rendered/scoring/demo-app-prod.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-37
+Check: CKV_K8S_31: "Ensure that the seccomp profile is set to docker/default or runtime/default"
+	FAILED for resource: Deployment.demo-prod.loadgen
+	File: /rendered/scoring/demo-app-prod.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-29
+Check: CKV_K8S_28: "Minimize the admission of containers with the NET_RAW capability"
+	FAILED for resource: Deployment.demo-prod.loadgen
+	File: /rendered/scoring/demo-app-prod.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-27
+Check: CKV_K8S_20: "Containers should not run with allowPrivilegeEscalation"
+	FAILED for resource: Deployment.demo-prod.loadgen
+	File: /rendered/scoring/demo-app-prod.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-19
+Check: CKV_K8S_30: "Apply security context to your containers"
+	FAILED for resource: Deployment.demo-prod.loadgen
+	File: /rendered/scoring/demo-app-prod.yaml:31-66
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-28
+Check: CKV_K8S_29: "Apply security context to your pods and containers"
+	FAILED for resource: Deployment.demo-prod.demo-app
+	File: /rendered/scoring/demo-app-prod.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/ensure-securitycontext-is-applied-to-pods-and-containers
+Check: CKV_K8S_23: "Minimize the admission of root containers"
+	FAILED for resource: Deployment.demo-prod.demo-app
+	File: /rendered/scoring/demo-app-prod.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-22
+Check: CKV_K8S_11: "CPU limits should be set"
+	FAILED for resource: Deployment.demo-prod.demo-app
+	File: /rendered/scoring/demo-app-prod.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-10
+Check: CKV_K8S_8: "Liveness Probe Should be Configured"
+	FAILED for resource: Deployment.demo-prod.demo-app
+	File: /rendered/scoring/demo-app-prod.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-7
+Check: CKV_K8S_37: "Minimize the admission of containers with capabilities assigned"
+	FAILED for resource: Deployment.demo-prod.demo-app
+	File: /rendered/scoring/demo-app-prod.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-34
+Check: CKV_K8S_38: "Ensure that Service Account Tokens are only mounted where necessary"
+	FAILED for resource: Deployment.demo-prod.demo-app
+	File: /rendered/scoring/demo-app-prod.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-35
+Check: CKV_K8S_22: "Use read-only filesystem for containers where possible"
+	FAILED for resource: Deployment.demo-prod.demo-app
+	File: /rendered/scoring/demo-app-prod.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-21
+Check: CKV_K8S_40: "Containers should run as a high UID to avoid host conflict"
+	FAILED for resource: Deployment.demo-prod.demo-app
+	File: /rendered/scoring/demo-app-prod.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-37
+Check: CKV_K8S_31: "Ensure that the seccomp profile is set to docker/default or runtime/default"
+	FAILED for resource: Deployment.demo-prod.demo-app
+	File: /rendered/scoring/demo-app-prod.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-29
+Check: CKV_K8S_28: "Minimize the admission of containers with the NET_RAW capability"
+	FAILED for resource: Deployment.demo-prod.demo-app
+	File: /rendered/scoring/demo-app-prod.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-27
+Check: CKV_K8S_20: "Containers should not run with allowPrivilegeEscalation"
+	FAILED for resource: Deployment.demo-prod.demo-app
+	File: /rendered/scoring/demo-app-prod.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-19
+Check: CKV_K8S_30: "Apply security context to your containers"
+	FAILED for resource: Deployment.demo-prod.demo-app
+	File: /rendered/scoring/demo-app-prod.yaml:67-104
+	Guide: https://docs.prismacloud.io/en/enterprise-edition/policy-reference/kubernetes-policies/kubernetes-policy-index/bc-k8s-28
+
