@@ -1,0 +1,29 @@
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  manifests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Load pinned versions
+        run: grep -E '^[A-Z_0-9]+=' versions.env >> "$GITHUB_ENV"
+      - name: Install kustomize, yq and kubeconform
+        run: |
+          mkdir -p "$HOME/bin" && cd "$HOME/bin"
+          curl -fsSL "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz" | tar xz kustomize
+          curl -fsSL -o yq "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64"
+          curl -fsSL "https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz" | tar xz kubeconform
+          chmod +x kustomize yq kubeconform
+          echo "$HOME/bin" >> "$GITHUB_PATH"
+      - name: kustomize build + kubeconform -strict
+        run: bash scripts/validate.sh kubeconform
+      - name: Platform charts render at pinned versions
+        run: bash scripts/check-platform.sh
