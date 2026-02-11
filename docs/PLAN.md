@@ -60,8 +60,8 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 - [x] Prometheus success-rate `AnalysisTemplate` (≥ 0.95, no-data does not pass)
 - [x] `PodMonitor` carrying the `rollouts-pod-template-hash` label
 - [x] Canary steps gated on analysis
-- [ ] Analysis tuning decisions recorded
-- [ ] Acceptance: v2 passes and promotes; `v3.0.0-bad` fails analysis and aborts automatically; both runs captured
+- [x] Analysis tuning decisions recorded
+- [x] Acceptance: good release passes and promotes; `v3.0.0-bad` fails analysis and aborts automatically; both runs captured
 
 ## Phase 7 — `ci/manifest-validation`
 

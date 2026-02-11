@@ -1,0 +1,39 @@
+# 2026-10-13T11:18:19Z
+$ git revert --no-edit 77ad540 && git push origin main   (a588ac2 revert: demo-app v3.0.0-bad in dev)
+2026-10-13T11:18:29Z  +   6s  argocd=Synced/Degraded@77ad540  phase=Degraded step=0 weight=0 aborted=true stable=86947d78d9 current=f998fdcf7  readyPods[v1.0.0=5]
+2026-10-13T11:18:33Z  +  12s  argocd=Synced/Degraded@77ad540  phase=Degraded step=0 weight=0 aborted=true stable=86947d78d9 current=f998fdcf7  readyPods[v1.0.0=5]
+2026-10-13T11:18:49Z  +  16s  argocd=Synced/Degraded@77ad540  phase=Degraded step=0 weight=0 aborted=true stable=86947d78d9 current=f998fdcf7  readyPods[v1.0.0=5]
+2026-10-13T11:19:14Z  +  34s  argocd=OutOfSync/Degraded@a588ac2  phase=Healthy step=5 weight=0 aborted= stable=86947d78d9 current=86947d78d9  readyPods[v1.0.0=5]
+2026-10-13T11:19:34Z  +  58s  argocd=Synced/Healthy@a588ac2  phase=Healthy step=5 weight=0 aborted= stable=86947d78d9 current=86947d78d9  readyPods[v1.0.0=5]
+2026-10-13T11:19:51Z  +  79s  argocd=Synced/Healthy@a588ac2  phase=Healthy step=5 weight=0 aborted= stable=86947d78d9 current=86947d78d9  readyPods[v1.0.0=5]
+
+# 2026-10-13T11:19:55Z
+$ kubectl --context kind-gitops-rollback -n argocd get application demo-app -o jsonpath='sync={.status.sync.status} health={.status.health.status} revision={.status.sync.revision}{"\n"}'
+sync=Synced health=Healthy revision=a588ac25eb2e3ad86d1d58e2323cffe20daab669
+
+# 2026-10-13T11:20:05Z
+$ git log -1 --format='git main: %h %s'; yq e '.images[0].newTag' apps/demo-app/overlays/dev/kustomization.yaml | sed 's/^/git image tag: /'
+git main: a588ac2 revert: demo-app v3.0.0-bad in dev
+git image tag: v1.0.0
+
+# 2026-10-13T11:20:11Z
+$ kubectl-argo-rollouts --context kind-gitops-rollback -n demo-dev get rollout demo-app --no-color
+Name:            demo-app
+Namespace:       demo-dev
+Status:          ✔ Healthy
+Strategy:        Canary
+  Step:          5/5
+  SetWeight:     100
+  ActualWeight:  100
+Images:          ghcr.io/abhichandra-v/gitops-demo-app:v1.0.0 (stable)
+Replicas:
+  Desired:       5
+  Current:       5
+  Updated:       5
+  Ready:         5
+  Available:     5
+
+NAME                                  KIND         STATUS        AGE    INFO
+⟳ demo-app                            Rollout      ✔ Healthy     29m    
+├──# revision:7                                                         
+│  └──⧉ demo-app-86947d78d9           ReplicaSet   ✔ Healthy     29m    stable
