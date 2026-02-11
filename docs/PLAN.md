@@ -68,7 +68,7 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 - [x] `validate.yml`: `kustomize build` for every overlay + `kubeconform -strict` with CRD schemas
 - [x] `kube-score` and Checkov with documented skips
 - [x] Demo app pod spec hardened (non-root, read-only root fs, dropped caps, limits, probes)
-- [ ] Validation gates documented
+- [x] Validation gates documented
 
 ## Phase 8 — `docs/scenarios`
 

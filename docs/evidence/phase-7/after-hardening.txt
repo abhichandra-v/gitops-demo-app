@@ -1,0 +1,23 @@
+# 2026-10-13T11:35:46Z  after hardening
+$ scripts/validate.sh all
+rendered apps/demo-app/overlays/dev/ -> rendered/overlays/demo-app-dev.yaml
+rendered apps/demo-app/overlays/prod/ -> rendered/overlays/demo-app-prod.yaml
+Summary: 24 resources found in 9 files - Valid: 24, Invalid: 0, Errors: 0, Skipped: 0
+apps/v1/Deployment demo-app in demo-dev                                       ✅
+apps/v1/Deployment loadgen in demo-dev                                        ✅
+apps/v1/Deployment demo-app in demo-prod                                      ✅
+apps/v1/Deployment loadgen in demo-prod                                       ✅
+networking.k8s.io/v1/Ingress demo-app in demo-dev                             ✅
+networking.k8s.io/v1/Ingress demo-app in demo-prod                            ✅
+policy/v1/PodDisruptionBudget demo-app in demo-dev                            ✅
+policy/v1/PodDisruptionBudget demo-app in demo-prod                           ✅
+v1/Service demo-app-canary in demo-dev                                        ✅
+v1/Service demo-app-stable in demo-dev                                        ✅
+v1/Service demo-app-canary in demo-prod                                       ✅
+v1/Service demo-app-stable in demo-prod                                       ✅
+kubernetes scan results:
+
+Passed checks: 352, Failed checks: 0, Skipped checks: 4
+
+
+exit=0
