@@ -6,4 +6,4 @@ resources:
 # The release lever: a release (or a rollback) is a change to newTag.
 images:
   - name: ghcr.io/abhichandra-v/gitops-demo-app
-    newTag: v2.0.0
+    newTag: v3.0.0-bad
