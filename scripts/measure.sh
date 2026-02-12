@@ -5,17 +5,19 @@
 # Usage: scripts/measure.sh [--until <regex>] [--timeout <seconds>] [--interval <seconds>]
 #   --until    stop once the status line matches this regex for 2 polls in a row
 #   --timeout  give up after this many seconds (default 600)
+#   --for      just observe for this many seconds, then exit 0
 # Environment: NAMESPACE (demo-dev), ROLLOUT (demo-app), APP (demo-app), T0 (epoch
 # seconds the elapsed column counts from; default: now).
 set -euo pipefail
 . "$(dirname "$0")/lib.sh"
 
 NAMESPACE="${NAMESPACE:-demo-dev}"; ROLLOUT="${ROLLOUT:-demo-app}"; APP="${APP:-demo-app}"
-until_re=""; timeout=600; interval=3
+until_re=""; timeout=600; interval=3; observe=0
 while [ $# -gt 0 ]; do
   case "$1" in
     --until) until_re="$2"; shift 2 ;;
     --timeout) timeout="$2"; shift 2 ;;
+    --for) timeout="$2"; observe=1; shift 2 ;;
     --interval) interval="$2"; shift 2 ;;
     *) echo "unknown argument $1" >&2; exit 2 ;;
   esac
@@ -45,6 +47,7 @@ while :; do
   else
     hits=0
   fi
+  if [ $((now - T0)) -ge "$timeout" ] && [ "$observe" = 1 ]; then exit 0; fi
   if [ $((now - T0)) -ge "$timeout" ]; then echo "measure: timed out after ${timeout}s" >&2; exit 1; fi
   sleep "$interval"
 done

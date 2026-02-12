@@ -7,6 +7,8 @@ set -euo pipefail
 tag="${1:?usage: release.sh <tag> [overlay]}"; overlay="${2:-dev}"
 file="apps/demo-app/overlays/${overlay}/kustomization.yaml"
 cd "${REPO_ROOT}"
+# Argo CD syncs origin/main, so a release commit anywhere else does nothing.
+[ "$(git branch --show-current)" = "main" ] || { echo "release.sh must run on main (now on $(git branch --show-current))" >&2; exit 1; }
 grep -q "^${tag}|" app/releases.env || { echo "unknown release tag ${tag} (see app/releases.env)" >&2; exit 1; }
 old="$(yq e '.images[0].newTag' "$file")"
 [ "$old" = "$tag" ] && { echo "${overlay} is already at ${tag}"; exit 0; }
