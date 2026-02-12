@@ -72,7 +72,7 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 
 ## Phase 8 — `docs/scenarios`
 
-- [ ] `scripts/measure.sh`
+- [x] `scripts/measure.sh`
 - [ ] A. Good release v1 → v2
 - [ ] B. Bad release v2 → `v3.0.0-bad`, automatic abort
 - [ ] C. Manual rollback inside the cluster with `selfHeal` on
