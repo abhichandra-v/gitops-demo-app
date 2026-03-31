@@ -28,7 +28,7 @@ check ingress-nginx         ingress-nginx         https://kubernetes.github.io/i
 check kube-prometheus-stack kube-prometheus-stack https://prometheus-community.github.io/helm-charts "${KUBE_PROMETHEUS_STACK_CHART_VERSION}" kube-prometheus-stack monitoring
 
 for f in argocd/*.yaml bootstrap/root-app.yaml; do
-  url="$(yq e 'select(.kind == "Application") | (.spec.source.repoURL // .spec.sources[1].repoURL)' "$f" | grep -v '^---$' | sort -u)"
+  url="$(yq e 'select(.kind == "Application") | (.spec.source.repoURL // .spec.sources[1].repoURL)' "$f" | { grep -v '^---$' || true; } | sort -u)"
   if [ -n "$url" ] && [ "$url" != "${GIT_REPO_URL}" ]; then
     echo "FAIL  $f points at $url, versions.env says ${GIT_REPO_URL}"; fail=1
   fi
