@@ -1,0 +1,136 @@
+2026-10-13T11:54:13Z  committed: demo-app v1.0.0 -> v2.0.0 in dev. Release it with: git push origin main
+# 2026-10-13T11:54:13Z
+$ git push origin main   (973f3ab chore(release): demo-app v2.0.0 in dev)
+# elapsed time (+Ns) counts from the push
+$ scripts/measure.sh --until Synced/Healthy.\*phase=Healthy.\*readyPods\\\[v2.0.0=5\\\]
+2026-10-13T11:54:25Z  +   8s  argocd=Synced/Healthy@3d69954  phase=Healthy step=5 weight=0 aborted= stable=6476864fcb current=6476864fcb  readyPods[v1.0.0=5]
+2026-10-13T11:54:31Z  +  14s  argocd=Synced/Healthy@3d69954  phase=Healthy step=5 weight=0 aborted= stable=6476864fcb current=6476864fcb  readyPods[v1.0.0=5]
+2026-10-13T11:54:36Z  +  20s  argocd=Synced/Healthy@3d69954  phase=Healthy step=5 weight=0 aborted= stable=6476864fcb current=6476864fcb  readyPods[v1.0.0=5]
+2026-10-13T11:54:42Z  +  25s  argocd=Synced/Healthy@3d69954  phase=Healthy step=5 weight=0 aborted= stable=6476864fcb current=6476864fcb  readyPods[v1.0.0=5]
+2026-10-13T11:54:48Z  +  31s  argocd=Synced/Healthy@3d69954  phase=Healthy step=5 weight=0 aborted= stable=6476864fcb current=6476864fcb  readyPods[v1.0.0=5]
+2026-10-13T11:54:54Z  +  37s  argocd=Synced/Healthy@3d69954  phase=Healthy step=5 weight=0 aborted= stable=6476864fcb current=6476864fcb  readyPods[v1.0.0=5]
+2026-10-13T11:55:00Z  +  43s  argocd=Synced/Healthy@3d69954  phase=Healthy step=5 weight=0 aborted= stable=6476864fcb current=6476864fcb  readyPods[v1.0.0=5]
+2026-10-13T11:55:07Z  +  50s  argocd=Synced/Healthy@3d69954  phase=Healthy step=5 weight=0 aborted= stable=6476864fcb current=6476864fcb  readyPods[v1.0.0=5]
+2026-10-13T11:55:13Z  +  56s  argocd=Synced/Healthy@3d69954  phase=Healthy step=5 weight=0 aborted= stable=6476864fcb current=6476864fcb  readyPods[v1.0.0=5]
+2026-10-13T11:55:19Z  +  62s  argocd=Synced/Healthy@3d69954  phase=Healthy step=5 weight=0 aborted= stable=6476864fcb current=6476864fcb  readyPods[v1.0.0=5]
+2026-10-13T11:55:24Z  +  68s  argocd=OutOfSync/Healthy@973f3ab  phase=Healthy step=5 weight=0 aborted= stable=6476864fcb current=6476864fcb  readyPods[v1.0.0=5]
+2026-10-13T11:55:31Z  +  74s  argocd=OutOfSync/Healthy@973f3ab  phase=Progressing step=0 weight=0 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=0]
+2026-10-13T11:55:37Z  +  80s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=1 weight=20 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=1]
+2026-10-13T11:55:43Z  +  86s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=1 weight=20 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=1]
+2026-10-13T11:55:49Z  +  92s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=1 weight=20 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=1]
+2026-10-13T11:55:55Z  +  98s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=1 weight=20 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=1]
+2026-10-13T11:56:01Z  + 105s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=1 weight=20 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=1]
+2026-10-13T11:56:08Z  + 111s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=1 weight=20 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=1]
+2026-10-13T11:56:14Z  + 117s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=1 weight=20 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=1]
+2026-10-13T11:56:20Z  + 123s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=1 weight=20 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=1]
+2026-10-13T11:56:26Z  + 129s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=1 weight=20 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=1]
+2026-10-13T11:56:31Z  + 135s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=1 weight=20 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=1]
+2026-10-13T11:56:36Z  + 140s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=1 weight=20 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=1]
+2026-10-13T11:56:42Z  + 145s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=1 weight=20 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=1]
+2026-10-13T11:56:47Z  + 151s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=1 weight=20 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=1]
+2026-10-13T11:56:54Z  + 157s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=2 weight=20 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=2]
+2026-10-13T11:56:58Z  + 163s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=3 weight=50 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=3]
+2026-10-13T11:57:07Z  + 169s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=3 weight=50 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=3]
+2026-10-13T11:57:13Z  + 176s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=3 weight=50 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=3]
+2026-10-13T11:57:18Z  + 182s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=3 weight=50 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=3]
+2026-10-13T11:57:23Z  + 187s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=3 weight=50 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=3]
+2026-10-13T11:57:28Z  + 193s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=3 weight=50 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=3]
+2026-10-13T11:57:33Z  + 197s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=3 weight=50 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=3]
+2026-10-13T11:57:38Z  + 202s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=3 weight=50 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=3]
+2026-10-13T11:57:43Z  + 208s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=3 weight=50 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=3]
+2026-10-13T11:57:48Z  + 213s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=3 weight=50 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=3]
+2026-10-13T11:57:53Z  + 218s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=3 weight=50 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=3]
+2026-10-13T11:57:59Z  + 222s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=3 weight=50 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=3]
+2026-10-13T11:58:11Z  + 229s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=3 weight=50 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=3]
+2026-10-13T11:58:18Z  + 240s  argocd=Synced/Progressing@973f3ab  phase=Progressing step=4 weight=50 aborted= stable=6476864fcb current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=4]
+2026-10-13T11:58:23Z  + 247s  argocd=Synced/Healthy@973f3ab  phase=Healthy step=5 weight=0 aborted= stable=cdb6c4f89 current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=5]
+2026-10-13T11:58:28Z  + 252s  argocd=Synced/Healthy@973f3ab  phase=Healthy step=5 weight=0 aborted= stable=cdb6c4f89 current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=5]
+2026-10-13T11:58:33Z  + 257s  argocd=Synced/Healthy@973f3ab  phase=Healthy step=5 weight=0 aborted= stable=cdb6c4f89 current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=5]
+2026-10-13T11:58:37Z  + 262s  argocd=Synced/Healthy@973f3ab  phase=Healthy step=5 weight=0 aborted= stable=cdb6c4f89 current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=5]
+2026-10-13T11:58:42Z  + 266s  argocd=Synced/Healthy@973f3ab  phase=Healthy step=5 weight=0 aborted= stable=cdb6c4f89 current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=5]
+2026-10-13T11:58:47Z  + 271s  argocd=Synced/Healthy@973f3ab  phase=Healthy step=5 weight=0 aborted= stable=cdb6c4f89 current=cdb6c4f89  readyPods[v1.0.0=5,v2.0.0=5]
+2026-10-13T11:58:52Z  + 277s  argocd=Synced/Healthy@973f3ab  phase=Healthy step=5 weight=0 aborted= stable=cdb6c4f89 current=cdb6c4f89  readyPods[v2.0.0=5]
+2026-10-13T11:58:57Z  + 281s  argocd=Synced/Healthy@973f3ab  phase=Healthy step=5 weight=0 aborted= stable=cdb6c4f89 current=cdb6c4f89  readyPods[v2.0.0=5]
+
+# 2026-10-13T11:58:58Z
+$ kubectl --context kind-gitops-rollback -n argocd get application demo-app -o jsonpath='sync={.status.sync.status} health={.status.health.status} revision={.status.sync.revision}{"\n"}'
+sync=Synced health=Healthy revision=973f3abdb8d84e6c44b79423bfd5a64f9b5577dc
+
+# 2026-10-13T11:58:59Z
+$ git log -1 --format='git main: %h %s'; yq e '.images[0].newTag' apps/demo-app/overlays/dev/kustomization.yaml | sed 's/^/git image tag: /'
+git main: 973f3ab chore(release): demo-app v2.0.0 in dev
+git image tag: v2.0.0
+
+# 2026-10-13T11:59:01Z
+$ kubectl-argo-rollouts --context kind-gitops-rollback -n demo-dev get rollout demo-app --no-color
+Name:            demo-app
+Namespace:       demo-dev
+Status:          ✔ Healthy
+Strategy:        Canary
+  Step:          5/5
+  SetWeight:     100
+  ActualWeight:  100
+Images:          ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0 (stable)
+Replicas:
+  Desired:       5
+  Current:       5
+  Updated:       5
+  Ready:         5
+  Available:     5
+
+NAME                                 KIND         STATUS        AGE    INFO
+⟳ demo-app                           Rollout      ✔ Healthy     68m    
+├──# revision:9                                                        
+│  ├──⧉ demo-app-cdb6c4f89           ReplicaSet   ✔ Healthy     3m36s  stable
+│  │  ├──□ demo-app-cdb6c4f89-lfr9b  Pod          ✔ Running     3m35s  ready:1/1
+│  │  ├──□ demo-app-cdb6c4f89-bmtm6  Pod          ✔ Running     2m14s  ready:1/1
+│  │  ├──□ demo-app-cdb6c4f89-jbggd  Pod          ✔ Running     2m14s  ready:1/1
+│  │  ├──□ demo-app-cdb6c4f89-nc2wn  Pod          ✔ Running     52s    ready:1/1
+│  │  └──□ demo-app-cdb6c4f89-sb4zr  Pod          ✔ Running     52s    ready:1/1
+│  ├──α demo-app-cdb6c4f89-9-1       AnalysisRun  ✔ Successful  3m29s  ✔ 4
+│  └──α demo-app-cdb6c4f89-9-3       AnalysisRun  ✔ Successful  2m9s   ✔ 4
+├──# revision:8                                                        
+│  ├──⧉ demo-app-6476864fcb          ReplicaSet   • ScaledDown  21m    
+│  ├──α demo-app-6476864fcb-8-1      AnalysisRun  ✔ Successful  21m    ✔ 4
+│  └──α demo-app-6476864fcb-8-3      AnalysisRun  ✔ Successful  20m    ✔ 4
+├──# revision:6                                                        
+│  ├──⧉ demo-app-f998fdcf7           ReplicaSet   • ScaledDown  42m    delay:passed
+│  └──α demo-app-f998fdcf7-6-1       AnalysisRun  ✖ Failed      42m    ✖ 2
+└──# revision:4                                                        
+   └──⧉ demo-app-6664ff96fb          ReplicaSet   • ScaledDown  67m    
+
+# 2026-10-13T11:59:04Z
+$ kubectl --context kind-gitops-rollback -n demo-dev get analysisrun --sort-by=.metadata.creationTimestamp -o custom-columns='NAME:.metadata.name,PHASE:.status.phase,MESSAGE:.status.message,STARTED:.status.startedAt'
+NAME                      PHASE        MESSAGE                                                                      STARTED
+demo-app-f998fdcf7-6-1    Failed       Metric "success-rate" assessed Failed due to failed (2) > failureLimit (1)   2026-10-13T11:16:26Z
+demo-app-6476864fcb-8-1   Successful   <none>                                                                       2026-10-13T11:37:41Z
+demo-app-6476864fcb-8-3   Successful   <none>                                                                       2026-10-13T11:38:59Z
+demo-app-cdb6c4f89-9-1    Successful   <none>                                                                       2026-10-13T11:55:34Z
+demo-app-cdb6c4f89-9-3    Successful   <none>                                                                       2026-10-13T11:56:54Z
+
+# 2026-10-13T11:59:06Z
+$ kubectl --context kind-gitops-rollback -n demo-dev get analysisrun --sort-by=.metadata.creationTimestamp -o jsonpath='{range .items[*]}{.metadata.name}{"  "}{.status.phase}{"\n"}{range .status.metricResults[*].measurements[*]}{"    "}{.startedAt}{"  "}{.phase}{"  value="}{.value}{" "}{.message}{"\n"}{end}{end}' | tail -n 14
+    2026-10-13T11:39:29Z  Successful  value=[1] 
+    2026-10-13T11:39:44Z  Successful  value=[1] 
+    2026-10-13T11:39:59Z  Successful  value=[1] 
+    2026-10-13T11:40:14Z  Successful  value=[1] 
+demo-app-cdb6c4f89-9-1  Successful
+    2026-10-13T11:56:04Z  Successful  value=[1] 
+    2026-10-13T11:56:19Z  Successful  value=[1] 
+    2026-10-13T11:56:34Z  Successful  value=[1] 
+    2026-10-13T11:56:49Z  Successful  value=[1] 
+demo-app-cdb6c4f89-9-3  Successful
+    2026-10-13T11:57:24Z  Successful  value=[1] 
+    2026-10-13T11:57:39Z  Successful  value=[1] 
+    2026-10-13T11:57:54Z  Successful  value=[1] 
+    2026-10-13T11:58:09Z  Successful  value=[1] 
+
+# 2026-10-13T11:59:07Z
+$ bash scripts/promql.sh 'sum by (rollouts_pod_template_hash,code)(rate(http_requests_total[1m]))'
+code=200,rollouts_pod_template_hash=6476864fcb  1.6022008698580508
+code=200,rollouts_pod_template_hash=cdb6c4f89  18.150697005095882
+
+# 2026-10-13T11:59:10Z
+$ curl -s -H 'Host: demo.localtest.me' 'http://localhost/?r=[1-200]' | grep -o '"version":"[^"]*"\|"error":"[^"]*"' | sort | uniq -c
+    200 "version":"v2.0.0"
+
