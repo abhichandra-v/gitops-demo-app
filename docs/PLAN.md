@@ -73,13 +73,13 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 ## Phase 8 — `docs/scenarios`
 
 - [x] `scripts/measure.sh`
-- [ ] A. Good release v1 → v2
-- [ ] B. Bad release v2 → `v3.0.0-bad`, automatic abort
-- [ ] C. Manual rollback inside the cluster with `selfHeal` on
-- [ ] D. GitOps rollback with `git revert`
-- [ ] E. Drift and self-heal
-- [ ] F. Argo CD unavailable
-- [ ] `docs/case-study/SCENARIOS.md` written from recorded evidence
+- [x] A. Good release v1 → v2
+- [x] B. Bad release v2 → `v3.0.0-bad`, automatic abort
+- [x] C. Manual rollback inside the cluster with `selfHeal` on
+- [x] D. GitOps rollback with `git revert`
+- [x] E. Drift and self-heal
+- [x] F. Argo CD unavailable
+- [x] `docs/case-study/SCENARIOS.md` written from recorded evidence
 
 > 🛑 **Checkpoint B:** owner runs the push steps for the scenarios with the cluster up and adds UI screenshots.
 
