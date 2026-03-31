@@ -1,0 +1,54 @@
+# 2026-10-14T05:00:16Z  before: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0
+# 2026-10-14T05:00:17Z
+$ kubectl --context kind-gitops-rollback -n demo-dev patch rollout demo-app --type json -p [{"op":"replace","path":"/spec/template/spec/containers/0/image","value":"ghcr.io/abhichandra-v/gitops-demo-app:v1.0.0"}]
+rollout.argoproj.io/demo-app patched
+2026-10-14T05:00:17Z  +  1s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v1.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:00:21Z  +  4s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:00:24Z  +  7s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:00:27Z  + 10s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:00:29Z  + 13s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:00:34Z  + 17s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:00:37Z  + 20s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:00:41Z  + 24s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:00:45Z  + 28s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:00:50Z  + 33s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:00:53Z  + 37s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:00:57Z  + 40s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:00Z  + 43s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:06Z  + 49s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:09Z  + 52s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:12Z  + 55s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:16Z  + 59s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:20Z  + 63s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:26Z  + 69s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:31Z  + 74s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:37Z  + 80s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:40Z  + 83s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:43Z  + 86s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:46Z  + 89s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:50Z  + 93s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:53Z  + 96s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:56Z  + 99s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:01:59Z  +103s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:02:04Z  +107s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:02:07Z  +110s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:02:11Z  +114s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:02:14Z  +117s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:02:17Z  +120s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:02:20Z  +124s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:02:24Z  +127s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:02:27Z  +130s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:02:30Z  +133s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:02:33Z  +136s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:02:37Z  +140s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:02:40Z  +143s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:02:43Z  +146s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T05:02:46Z  +149s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+
+# 2026-10-14T05:02:49Z
+$ kubectl --context kind-gitops-rollback -n argocd get application demo-app -o jsonpath='{range .status.history[*]}{.deployedAt}  revision={.revision}  automated={.initiatedBy.automated}{"\n"}{end}' | tail -n 4
+2026-10-13T11:37:39Z  revision=f6011266d7906cab91a643d75dc27e234d9f6830  automated=true
+2026-10-13T11:55:31Z  revision=973f3abdb8d84e6c44b79423bfd5a64f9b5577dc  automated=true
+2026-10-13T11:59:54Z  revision=d965d5a47222e81f75b9488956834568d5319f50  automated=true
+2026-10-14T04:58:28Z  revision=ae0bf460ad4b5fb031d6fee739c3ee86ecae6992  automated=true
+

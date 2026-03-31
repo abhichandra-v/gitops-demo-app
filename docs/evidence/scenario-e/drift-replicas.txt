@@ -1,0 +1,31 @@
+# 2026-10-14T04:58:59Z  before: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0
+# 2026-10-14T04:58:59Z
+$ kubectl --context kind-gitops-rollback -n demo-dev patch rollout demo-app --type merge -p {"spec":{"replicas":2}}
+rollout.argoproj.io/demo-app patched
+2026-10-14T04:58:59Z  +  0s  live: replicas=2 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=OutOfSync/Healthy  readyPods=2
+2026-10-14T04:59:05Z  +  6s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Progressing  readyPods=2
+2026-10-14T04:59:10Z  + 11s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Progressing  readyPods=4
+2026-10-14T04:59:13Z  + 14s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:16Z  + 18s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:19Z  + 20s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:22Z  + 23s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:25Z  + 26s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:28Z  + 29s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:31Z  + 32s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:34Z  + 35s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:37Z  + 38s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:40Z  + 41s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:43Z  + 44s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:46Z  + 47s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:49Z  + 50s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:52Z  + 53s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:55Z  + 56s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+2026-10-14T04:59:58Z  + 59s  live: replicas=5 image=ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0  argocd=Synced/Healthy  readyPods=5
+
+# 2026-10-14T05:00:04Z
+$ kubectl --context kind-gitops-rollback -n argocd get application demo-app -o jsonpath='{range .status.history[*]}{.deployedAt}  revision={.revision}  automated={.initiatedBy.automated}{"\n"}{end}' | tail -n 4
+2026-10-13T11:37:39Z  revision=f6011266d7906cab91a643d75dc27e234d9f6830  automated=true
+2026-10-13T11:55:31Z  revision=973f3abdb8d84e6c44b79423bfd5a64f9b5577dc  automated=true
+2026-10-13T11:59:54Z  revision=d965d5a47222e81f75b9488956834568d5319f50  automated=true
+2026-10-14T04:58:28Z  revision=ae0bf460ad4b5fb031d6fee739c3ee86ecae6992  automated=true
+

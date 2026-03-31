@@ -1,0 +1,50 @@
+
+# 2026-10-14T05:02:56Z  baseline
+2026-10-14T05:02:56Z  +  1s  controller=1/1 server=1/1  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:03:05Z  +  9s  controller=1/1 server=1/1  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+
+# 2026-10-14T05:03:14Z  1. scale argocd-server to 0 while the application controller is still running
+$ kubectl --context kind-gitops-rollback -n argocd scale deploy argocd-server --replicas=0
+deployment.apps/argocd-server scaled
+2026-10-14T05:03:15Z  + 19s  controller=1/1 server=/0  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:03:23Z  + 27s  controller=1/1 server=/0  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:03:30Z  + 35s  controller=1/1 server=/0  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:03:40Z  + 44s  controller=1/1 server=/0  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:03:50Z  + 54s  controller=1/1 server=/1  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:03:57Z  + 61s  controller=1/1 server=1/1  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:04:04Z  + 68s  controller=1/1 server=1/1  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:04:12Z  + 76s  controller=1/1 server=1/1  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+
+# 2026-10-14T05:04:21Z  2. scale the application controller to 0, then the server
+$ kubectl --context kind-gitops-rollback -n argocd scale sts argocd-application-controller --replicas=0
+statefulset.apps/argocd-application-controller scaled
+deployment.apps/argocd-server scaled
+2026-10-14T05:04:22Z  + 86s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:04:29Z  + 93s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:04:36Z  +100s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:04:43Z  +107s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:04:50Z  +114s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:04:58Z  +122s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:05:05Z  +129s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+
+# 2026-10-14T05:05:13Z  3. Argo CD is down: introduce drift (rollout replicas 5 -> 3)
+$ kubectl --context kind-gitops-rollback -n demo-dev patch rollout demo-app --type merge -p {"spec":{"replicas":3}}
+rollout.argoproj.io/demo-app patched
+2026-10-14T05:05:13Z  +137s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=3 ready=3  serving(50 req): v2.0.0 x50 
+2026-10-14T05:05:26Z  +150s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=3 ready=3  serving(50 req): v2.0.0 x50 
+2026-10-14T05:05:32Z  +156s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=3 ready=3  serving(50 req): v2.0.0 x50 
+2026-10-14T05:05:40Z  +164s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=3 ready=3  serving(50 req): v2.0.0 x50 
+2026-10-14T05:05:49Z  +173s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=3 ready=3  serving(50 req): v2.0.0 x50 
+2026-10-14T05:05:58Z  +182s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=3 ready=3  serving(50 req): v2.0.0 x50 
+2026-10-14T05:06:05Z  +189s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=3 ready=3  serving(50 req): v2.0.0 x50 
+2026-10-14T05:06:13Z  +197s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=3 ready=3  serving(50 req): v2.0.0 x50 
+2026-10-14T05:06:20Z  +204s  controller=/0 server=/0  app=Synced/Healthy  rollout.replicas=3 ready=3  serving(50 req): v2.0.0 x50 
+
+# 2026-10-14T05:06:28Z  4. restore only the application controller
+$ kubectl --context kind-gitops-rollback -n argocd scale sts argocd-application-controller --replicas=1
+statefulset.apps/argocd-application-controller scaled
+2026-10-14T05:06:28Z  +212s  controller=/1 server=/0  app=Synced/Healthy  rollout.replicas=3 ready=3  serving(50 req): v2.0.0 x50 
+2026-10-14T05:06:37Z  +221s  controller=/1 server=/1  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+2026-10-14T05:06:46Z  +230s  controller=1/1 server=/1  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
+# 2026-10-14T05:06:49Z  recovered 21s after the controller was scaled back up
+2026-10-14T05:06:49Z  +233s  controller=1/1 server=1/1  app=Synced/Healthy  rollout.replicas=5 ready=5  serving(50 req): v2.0.0 x50 
