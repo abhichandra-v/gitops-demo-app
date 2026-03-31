@@ -1,0 +1,134 @@
+# 2026-10-14T04:54:32Z  state before (git says: v3.0.0-bad)
+2026-10-14T04:54:37Z  +   0s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+# 2026-10-14T04:54:37Z  restart the aborted rollout so there is a canary in progress
+$ kubectl argo rollouts retry rollout demo-app -n demo-dev
+rollout 'demo-app' retried
+2026-10-14T04:54:43Z  +   1s  argocd=Synced/Degraded@d965d5a  phase=Progressing step=0 weight=0 aborted=false stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5,v3.0.0-bad=0]
+2026-10-14T04:54:49Z  +   9s  argocd=Synced/Progressing@d965d5a  phase=Progressing step=0 weight=0 aborted=false stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5,v3.0.0-bad=0]
+2026-10-14T04:54:54Z  +  15s  argocd=Synced/Progressing@d965d5a  phase=Progressing step=1 weight=20 aborted=false stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5,v3.0.0-bad=1]
+# 2026-10-14T04:54:54Z  abort it by hand before the analysis gets to decide
+$ kubectl argo rollouts abort demo-app -n demo-dev
+rollout 'demo-app' aborted
+# elapsed time (+Ns) counts from the abort
+2026-10-14T04:55:00Z  +   2s  argocd=Synced/Progressing@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5,v3.0.0-bad=1]
+2026-10-14T04:55:09Z  +  10s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5,v3.0.0-bad=1]
+2026-10-14T04:55:15Z  +  18s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5,v3.0.0-bad=1]
+2026-10-14T04:55:22Z  +  25s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5,v3.0.0-bad=1]
+2026-10-14T04:55:27Z  +  31s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:55:32Z  +  36s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:55:37Z  +  41s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:55:42Z  +  46s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:55:47Z  +  51s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:55:52Z  +  57s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:55:58Z  +  62s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:56:05Z  +  68s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:56:09Z  +  74s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:56:15Z  +  78s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:56:20Z  +  84s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:56:24Z  +  89s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:56:29Z  +  94s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:56:33Z  +  98s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:56:37Z  + 102s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:56:41Z  + 106s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:56:45Z  + 110s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:56:50Z  + 114s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:56:54Z  + 119s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+2026-10-14T04:56:58Z  + 123s  argocd=Synced/Degraded@d965d5a  phase=Degraded step=0 weight=0 aborted=true stable=cdb6c4f89 current=56d568d88  readyPods[v2.0.0=5]
+
+# 2026-10-14T04:56:58Z
+$ kubectl --context kind-gitops-rollback -n argocd get application demo-app -o jsonpath='{range .status.history[*]}{.deployedAt}  revision={.revision}  automated={.initiatedBy.automated}{"\n"}{end}' | tail -n 4
+2026-10-13T11:19:10Z  revision=a588ac25eb2e3ad86d1d58e2323cffe20daab669  automated=true
+2026-10-13T11:37:39Z  revision=f6011266d7906cab91a643d75dc27e234d9f6830  automated=true
+2026-10-13T11:55:31Z  revision=973f3abdb8d84e6c44b79423bfd5a64f9b5577dc  automated=true
+2026-10-13T11:59:54Z  revision=d965d5a47222e81f75b9488956834568d5319f50  automated=true
+
+# 2026-10-14T04:57:00Z
+$ kubectl --context kind-gitops-rollback -n argocd get application demo-app -o jsonpath='sync={.status.sync.status} health={.status.health.status} revision={.status.sync.revision}{"\n"}'
+sync=Synced health=Degraded revision=d965d5a47222e81f75b9488956834568d5319f50
+
+# 2026-10-14T04:57:00Z
+$ git log -1 --format='git main: %h %s'; yq e '.images[0].newTag' apps/demo-app/overlays/dev/kustomization.yaml | sed 's/^/git image tag: /'
+git main: d965d5a chore(release): demo-app v3.0.0-bad in dev
+git image tag: v3.0.0-bad
+
+# 2026-10-14T04:57:03Z
+$ kubectl-argo-rollouts --context kind-gitops-rollback -n demo-dev get rollout demo-app --no-color
+Name:            demo-app
+Namespace:       demo-dev
+Status:          ✖ Degraded
+Message:         RolloutAborted: Rollout aborted update to revision 12
+Strategy:        Canary
+  Step:          0/5
+  SetWeight:     0
+  ActualWeight:  0
+Images:          ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0 (stable)
+Replicas:
+  Desired:       5
+  Current:       5
+  Updated:       0
+  Ready:         5
+  Available:     5
+
+NAME                                 KIND         STATUS        AGE    INFO
+⟳ demo-app                           Rollout      ✖ Degraded    18h    
+├──# revision:12                                                       
+│  ├──⧉ demo-app-56d568d88           ReplicaSet   • ScaledDown  16h    canary,delay:passed
+│  ├──α demo-app-56d568d88-12-1      AnalysisRun  ✖ Failed      16h    ✖ 2
+│  ├──α demo-app-56d568d88-12-1.1    AnalysisRun  ✔ Successful  16h    
+│  └──α demo-app-56d568d88-12-1.2    AnalysisRun  ✔ Successful  2m11s  
+├──# revision:11                                                       
+│  └──⧉ demo-app-cdb6c4f89           ReplicaSet   ✔ Healthy     17h    stable
+│     ├──□ demo-app-cdb6c4f89-lfr9b  Pod          ✔ Running     17h    ready:1/1
+│     ├──□ demo-app-cdb6c4f89-bmtm6  Pod          ✔ Running     17h    ready:1/1
+│     ├──□ demo-app-cdb6c4f89-jbggd  Pod          ✔ Running     17h    ready:1/1
+│     ├──□ demo-app-cdb6c4f89-nc2wn  Pod          ✔ Running     16h    ready:1/1
+│     └──□ demo-app-cdb6c4f89-sb4zr  Pod          ✔ Running     16h    ready:1/1
+├──# revision:10                                                       
+│  └──α demo-app-56d568d88-10-1      AnalysisRun  ✖ Failed      16h    ✖ 2
+├──# revision:9                                                        
+│  ├──α demo-app-cdb6c4f89-9-1       AnalysisRun  ✔ Successful  17h    ✔ 4
+│  └──α demo-app-cdb6c4f89-9-3       AnalysisRun  ✔ Successful  17h    ✔ 4
+├──# revision:8                                                        
+│  ├──⧉ demo-app-6476864fcb          ReplicaSet   • ScaledDown  17h    
+│  └──α demo-app-6476864fcb-8-3      AnalysisRun  ✔ Successful  17h    ✔ 4
+└──# revision:6                                                        
+   ├──⧉ demo-app-f998fdcf7           ReplicaSet   • ScaledDown  17h    delay:passed
+   └──α demo-app-f998fdcf7-6-1       AnalysisRun  ✖ Failed      17h    ✖ 2
+
+# 2026-10-14T04:57:04Z
+$ kubectl --context kind-gitops-rollback -n demo-dev get analysisrun --sort-by=.metadata.creationTimestamp -o custom-columns='NAME:.metadata.name,PHASE:.status.phase,MESSAGE:.status.message,STARTED:.status.startedAt'
+NAME                        PHASE        MESSAGE                                                                      STARTED
+demo-app-f998fdcf7-6-1      Failed       Metric "success-rate" assessed Failed due to failed (2) > failureLimit (1)   2026-10-13T11:16:26Z
+demo-app-6476864fcb-8-3     Successful   <none>                                                                       2026-10-13T11:38:59Z
+demo-app-cdb6c4f89-9-1      Successful   <none>                                                                       2026-10-13T11:55:34Z
+demo-app-cdb6c4f89-9-3      Successful   <none>                                                                       2026-10-13T11:56:54Z
+demo-app-56d568d88-10-1     Failed       Metric "success-rate" assessed Failed due to failed (2) > failureLimit (1)   2026-10-13T11:59:56Z
+demo-app-56d568d88-12-1     Failed       Metric "success-rate" assessed Failed due to failed (2) > failureLimit (1)   2026-10-13T12:01:53Z
+demo-app-56d568d88-12-1.1   Successful   Run Terminated                                                               2026-10-13T12:06:22Z
+demo-app-56d568d88-12-1.2   Successful   Run Terminated                                                               2026-10-14T04:54:52Z
+
+# 2026-10-14T04:57:04Z
+$ kubectl --context kind-gitops-rollback -n demo-dev get analysisrun --sort-by=.metadata.creationTimestamp -o jsonpath='{range .items[*]}{.metadata.name}{"  "}{.status.phase}{"\n"}{range .status.metricResults[*].measurements[*]}{"    "}{.startedAt}{"  "}{.phase}{"  value="}{.value}{" "}{.message}{"\n"}{end}{end}' | tail -n 14
+    2026-10-13T11:56:49Z  Successful  value=[1] 
+demo-app-cdb6c4f89-9-3  Successful
+    2026-10-13T11:57:24Z  Successful  value=[1] 
+    2026-10-13T11:57:39Z  Successful  value=[1] 
+    2026-10-13T11:57:54Z  Successful  value=[1] 
+    2026-10-13T11:58:09Z  Successful  value=[1] 
+demo-app-56d568d88-10-1  Failed
+    2026-10-13T12:00:26Z  Failed  value=[0.5211267605633803] 
+    2026-10-13T12:00:41Z  Failed  value=[0.5525941044038857] 
+demo-app-56d568d88-12-1  Failed
+    2026-10-13T12:02:23Z  Failed  value=[0.6636654581440787] 
+    2026-10-13T12:02:38Z  Failed  value=[0.5781736008650817] 
+demo-app-56d568d88-12-1.1  Successful
+demo-app-56d568d88-12-1.2  Successful
+
+# 2026-10-14T04:57:05Z
+$ bash scripts/promql.sh 'sum by (rollouts_pod_template_hash,code)(rate(http_requests_total[1m]))'
+code=200,rollouts_pod_template_hash=cdb6c4f89  20.019959977057326
+
+# 2026-10-14T04:57:07Z
+$ curl -s -H 'Host: demo.localtest.me' 'http://localhost/?r=[1-200]' | grep -o '"version":"[^"]*"\|"error":"[^"]*"' | sort | uniq -c
+    200 "version":"v2.0.0"
+
