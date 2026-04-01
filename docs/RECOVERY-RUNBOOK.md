@@ -94,9 +94,11 @@ make cluster-up bootstrap
 bash scripts/status.sh --wait 1200
 ```
 
-Recorded run: see [rebuild evidence](evidence/rebuild/cluster-rebuild-from-git.txt)
-for the measured time from an empty machine to all six Applications
-`Synced/Healthy`, with images pulled from ghcr.io.
+Recorded run ([evidence](evidence/rebuild/cluster-rebuild-from-git.txt)), starting with no cluster: cluster up
+in 88s, Argo CD installed at 226s, all six Applications `Synced/Healthy` at
+**542s**, with the demo app images pulled from ghcr.io and 50 of 50 sampled
+requests served by the version Git names. Most of the time is image pulls
+(the Argo CD image alone took 42s).
 
 ## Measured recovery times
 
@@ -106,3 +108,4 @@ for the measured time from an empty machine to all six Applications
 | Git still names bad tag | `git revert` + push | 67s to `Synced/Healthy` | [D](evidence/scenario-d/git-revert-bad-release.txt) |
 | Manual replica drift | selfHeal | 6s (spec), 14s (all pods ready) | [E](evidence/scenario-e/drift-replicas.txt) |
 | Argo CD controller down | scale controller to 1 | 21s | [F](evidence/scenario-f/argocd-down.txt) |
+| Cluster lost | `make cluster-up bootstrap` | 542s to all apps `Synced/Healthy` | [rebuild](evidence/rebuild/cluster-rebuild-from-git.txt) |

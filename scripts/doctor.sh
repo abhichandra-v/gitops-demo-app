@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Checks that the local prerequisites are present. Installs nothing.
 set -uo pipefail
+. "$(dirname "$0")/lib.sh"
 
 MIN_DOCKER_MEM_GB=6
 missing=()

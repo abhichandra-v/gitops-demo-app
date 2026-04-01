@@ -85,19 +85,19 @@ Checkpoints marked 🛑 need the repo owner (push, GitHub settings, cluster runs
 
 ## Phase 9 — `docs/final-polish` → tag `v1.0.0`
 
-- [ ] `docs/ARCHITECTURE.md` with Mermaid diagrams
-- [ ] `docs/RELEASE-PROCEDURE.md`
-- [ ] `docs/RECOVERY-RUNBOOK.md`
-- [ ] `README.md` with scenario results table
-- [ ] Final pass: every number maps to an evidence file; `make doctor` clean; validate workflow green; gitleaks on full history; `git status` clean
+- [x] `docs/ARCHITECTURE.md` with Mermaid diagrams
+- [x] `docs/RELEASE-PROCEDURE.md`
+- [x] `docs/RECOVERY-RUNBOOK.md`
+- [x] `README.md` with scenario results table
+- [x] Final pass: every number maps to an evidence file; validate workflow green; gitleaks on full history (no leaks); `git status` clean. `make doctor` reports only `make` missing on the build machine
 
 ## Definition of done
 
-- [ ] One `make cluster-up bootstrap` brings up Argo CD, the platform and the demo app purely from Git
-- [ ] Good release promotes through canary steps with analysis passing
-- [ ] Bad release is aborted automatically by Prometheus analysis; evidence captured
-- [ ] Manual undo vs `git revert` behaviour observed, recorded and explained
-- [ ] Validation workflow green (kustomize, kubeconform, kube-score, Checkov)
-- [ ] Architecture, release procedure and recovery runbook written from observed results
-- [ ] History is feature-branch merges with Conventional Commits and no secrets
-- [ ] Tags `v0.1.0`, `v0.5.0`, `v1.0.0` exist locally
+- [x] One `make cluster-up bootstrap` brings up Argo CD, the platform and the demo app purely from Git
+- [x] Good release promotes through canary steps with analysis passing
+- [x] Bad release is aborted automatically by Prometheus analysis; evidence captured
+- [x] Manual undo vs `git revert` behaviour observed, recorded and explained
+- [x] Validation workflow green (kustomize, kubeconform, kube-score, Checkov)
+- [x] Architecture, release procedure and recovery runbook written from observed results
+- [x] History is feature-branch merges with Conventional Commits and no secrets
+- [x] Tags `v0.1.0`, `v0.5.0`, `v1.0.0` exist locally
