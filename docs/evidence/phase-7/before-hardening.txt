@@ -3,7 +3,7 @@ $ scripts/validate.sh kube-score
 rendered apps/demo-app/overlays/dev/ -> rendered/overlays/demo-app-dev.yaml
 rendered apps/demo-app/overlays/prod/ -> rendered/overlays/demo-app-prod.yaml
 apps/v1/Deployment demo-app in demo-dev                                       馃挜
-    path=C:\Users\PC\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\scratch-workspaces\c6c35fb1-30e9-48e4-b21e-afc25bbed8eb\3f704822-c466-4f25-b8a8-a72d529f3d7e\scratch-2026-10-13-1444da\rendered\scoring\demo-app-dev.yaml
+    path=rendered/scoring/demo-app-dev.yaml
     [CRITICAL] Container Security Context ReadOnlyRootFilesystem
         路 demo-app -> Container has no configured security context
             Set securityContext to run the container in a more secure context.
@@ -39,7 +39,7 @@ apps/v1/Deployment demo-app in demo-dev                                       馃
             from a deployment from being scheduled on the same node. This
             increases availability in case the node becomes unavailable.
 apps/v1/Deployment loadgen in demo-dev                                        馃挜
-    path=C:\Users\PC\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\scratch-workspaces\c6c35fb1-30e9-48e4-b21e-afc25bbed8eb\3f704822-c466-4f25-b8a8-a72d529f3d7e\scratch-2026-10-13-1444da\rendered\scoring\demo-app-dev.yaml
+    path=rendered/scoring/demo-app-dev.yaml
     [CRITICAL] Container Resources
         路 fortio -> CPU limit is not set
             Resource limits are recommended to avoid resource DDOS. Set
@@ -59,7 +59,7 @@ apps/v1/Deployment loadgen in demo-dev                                        馃
         路 fortio -> Container has no configured security context
             Set securityContext to run the container in a more secure context.
 apps/v1/Deployment demo-app in demo-prod                                      馃挜
-    path=C:\Users\PC\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\scratch-workspaces\c6c35fb1-30e9-48e4-b21e-afc25bbed8eb\3f704822-c466-4f25-b8a8-a72d529f3d7e\scratch-2026-10-13-1444da\rendered\scoring\demo-app-prod.yaml
+    path=rendered/scoring/demo-app-prod.yaml
     [CRITICAL] Container Resources
         路 demo-app -> CPU limit is not set
             Resource limits are recommended to avoid resource DDOS. Set
@@ -95,7 +95,7 @@ apps/v1/Deployment demo-app in demo-prod                                      馃
             from a deployment from being scheduled on the same node. This
             increases availability in case the node becomes unavailable.
 apps/v1/Deployment loadgen in demo-prod                                       馃挜
-    path=C:\Users\PC\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\scratch-workspaces\c6c35fb1-30e9-48e4-b21e-afc25bbed8eb\3f704822-c466-4f25-b8a8-a72d529f3d7e\scratch-2026-10-13-1444da\rendered\scoring\demo-app-prod.yaml
+    path=rendered/scoring/demo-app-prod.yaml
     [CRITICAL] Container Ephemeral Storage Request and Limit
         路 fortio -> Ephemeral Storage limit is not set
             Resource limits are recommended to avoid resource DDOS. Set

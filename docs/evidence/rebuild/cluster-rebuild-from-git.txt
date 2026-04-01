@@ -1,0 +1,53 @@
+# 2026-10-14T05:14:08Z
+$ bash scripts/cluster-down.sh   # make cluster-down
+Deleting cluster "gitops-rollback" ...
+Deleted nodes: ["gitops-rollback-worker2" "gitops-rollback-control-plane" "gitops-rollback-worker"]
+
+# 2026-10-14T05:14:24Z  (T0)
+$ bash scripts/cluster-up.sh && bash bootstrap/install-argocd.sh && bash scripts/apply-root.sh   # what make cluster-up bootstrap runs; no image side-loading
+ • Ready after 8s 💚
+gitops-rollback-control-plane   Ready      control-plane   31s   v1.36.4   172.18.0.4    <none>        Debian GNU/Linux 13 (trixie)   6.6.87.2-microsoft-standard-WSL2 (amd64)   containerd://2.3.4
+gitops-rollback-worker          NotReady   <none>          14s   v1.36.4   172.18.0.3    <none>        Debian GNU/Linux 13 (trixie)   6.6.87.2-microsoft-standard-WSL2 (amd64)   containerd://2.3.4
+gitops-rollback-worker2         NotReady   <none>          14s   v1.36.4   172.18.0.2    <none>        Debian GNU/Linux 13 (trixie)   6.6.87.2-microsoft-standard-WSL2 (amd64)   containerd://2.3.4
+# 2026-10-14T05:15:52Z  +88s cluster up
+2026-10-14T05:15:53Z  installing argo-cd chart 10.10.3 into namespace argocd
+argocd-application-controller-0       1/1     Running   0          70s
+argocd-redis-86f677dd5d-vbf8m         1/1     Running   0          70s
+argocd-repo-server-67655854f8-j7bq4   1/1     Running   0          70s
+argocd-server-9cb94f479-bhpjm         1/1     Running   0          70s
+# 2026-10-14T05:18:09Z  +226s argo cd installed
+appproject.argoproj.io/platform created
+appproject.argoproj.io/apps created
+application.argoproj.io/root created
+2026-10-14T05:18:12Z  root application applied; watch with: make status
+
+$ MIN_APPS=6 scripts/status.sh --wait 1200
+2026-10-14T05:23:25Z  all 6 applications Synced/Healthy
+NAME                    SYNC     HEALTH    REVISION
+argo-rollouts           Synced   Healthy   <none>
+argocd                  Synced   Healthy   <none>
+demo-app                Synced   Healthy   db960ec9186a2696ab73f0f2b01343aa0ea6a420
+ingress-nginx           Synced   Healthy   <none>
+kube-prometheus-stack   Synced   Healthy   <none>
+root                    Synced   Healthy   db960ec9186a2696ab73f0f2b01343aa0ea6a420
+# 2026-10-14T05:23:26Z  +542s everything Synced/Healthy from Git
+# 2026-10-14T05:23:26Z
+$ kubectl --context kind-gitops-rollback -n demo-dev get pods -o custom-columns='NAME:.metadata.name,IMAGE:.spec.containers[0].image,READY:.status.containerStatuses[0].ready'
+NAME                       IMAGE                                          READY
+demo-app-cdb6c4f89-c6kfx   ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0   true
+demo-app-cdb6c4f89-f6vxv   ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0   true
+demo-app-cdb6c4f89-hdv2q   ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0   true
+demo-app-cdb6c4f89-mk944   ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0   true
+demo-app-cdb6c4f89-zmkmx   ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0   true
+loadgen-58c66787f6-zl779   fortio/fortio:1.76.0                           true
+
+# 2026-10-14T05:23:28Z
+$ kubectl --context kind-gitops-rollback -n demo-dev get events --field-selector reason=Pulled -o custom-columns='MESSAGE:.message' | grep gitops-demo-app | head -n 3
+Successfully pulled image "ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0" in 1.24s (7.506s including waiting). Image size: 4545859 bytes.
+Successfully pulled image "ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0" in 5.06s (5.06s including waiting). Image size: 4545859 bytes.
+Successfully pulled image "ghcr.io/abhichandra-v/gitops-demo-app:v2.0.0" in 1.241s (6.15s including waiting). Image size: 4545859 bytes.
+
+# 2026-10-14T05:23:29Z
+$ curl -s -H 'Host: demo.localtest.me' 'http://localhost/?r=[1-50]' | grep -o '"version":"[^"]*"' | sort | uniq -c
+     50 "version":"v2.0.0"
+

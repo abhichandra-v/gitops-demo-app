@@ -20,3 +20,12 @@ registry path: (1) the images on the nodes are local builds, not the CI-built
 digests; (2) pod start is faster because there is no pull, so measured rollout
 times are slightly optimistic compared with a cold pull; (3) a rebuilt cluster
 needs `make load-images` before the demo app can start.
+
+**Update (2026-10-14).** Once the repository was public and `app-image.yml`
+had run, `ghcr.io/abhichandra-v/gitops-demo-app` accepted anonymous pulls for
+all three tags (the package is linked to the public repo through the
+`org.opencontainers.image.source` label). The from-scratch rebuild in
+`docs/evidence/rebuild/` used no side-loading: the nodes pulled from ghcr.io.
+All earlier evidence (Phases 4–8) was recorded with side-loaded local builds of
+the same Dockerfile and build args. `make load-images` stays as the offline
+fallback.
