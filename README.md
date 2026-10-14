@@ -22,6 +22,14 @@ flowchart LR
 
 More in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
+## Screenshots
+
+| Argo CD app-of-apps | Canary at 20% with analysis running |
+|---|---|
+| ![Argo CD app-of-apps](docs/evidence/screenshots/argocd-app-of-apps.jpg) | ![Rollouts canary at 20%](docs/evidence/screenshots/rollouts-canary-20pct.png) |
+| **Bad release aborted by analysis** | **Argo CD after the abort: Synced but Degraded** |
+| ![Rollouts aborted bad release](docs/evidence/screenshots/rollouts-aborted-bad-release.png) | ![Argo CD Synced but Degraded](docs/evidence/screenshots/argocd-synced-degraded.jpg) |
+
 ## Results
 
 Every number comes from a recorded run; the evidence column links the raw,
@@ -98,6 +106,8 @@ docs/                 architecture, release procedure, runbook, ADRs, evidence
 
 ## Documentation
 
+- [Case study: the six scenarios](docs/case-study/SCENARIOS.md) — what happened in each run, with timings and screenshots
+- [Local bootstrap](docs/BOOTSTRAP.md) — cluster and Argo CD setup step by step
 - [Architecture](docs/ARCHITECTURE.md) — diagrams, components, why each choice
 - [Release procedure](docs/RELEASE-PROCEDURE.md) — PR to promoted, who does what
 - [Recovery runbook](docs/RECOVERY-RUNBOOK.md) — abort vs undo vs revert, outages, rebuild
@@ -117,7 +127,6 @@ docs/                 architecture, release procedure, runbook, ADRs, evidence
 - The analysis needs steady traffic, supplied by an in-cluster load generator.
   With real users, low traffic would stall releases rather than pass them.
 - No NetworkPolicies, single-replica controllers, 6h Prometheus retention.
-- UI screenshots are placeholders (listed in the case study) until added.
 
 ## License
 
