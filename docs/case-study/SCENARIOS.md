@@ -191,9 +191,23 @@ The Application status shown during an outage cannot be trusted.
 
 ## Screenshots
 
-Placeholders, to be added from the Argo CD UI and the Rollouts dashboard:
+Taken on 2026-10-14 on the rebuilt cluster, during a fresh good release
+(v1.0.0) and bad release (v3.0.0-bad) run for the purpose. Revision numbers in
+the dashboard differ from the evidence files because the cluster had been
+rebuilt.
 
-- `docs/evidence/screenshots/argocd-app-of-apps.png` — *placeholder*
-- `docs/evidence/screenshots/rollouts-canary-20pct.png` — *placeholder*
-- `docs/evidence/screenshots/rollouts-aborted-bad-release.png` — *placeholder*
-- `docs/evidence/screenshots/argocd-synced-degraded.png` — *placeholder*
+**Argo CD app-of-apps:** root and its five child applications, all Synced and Healthy.
+
+![Argo CD app-of-apps](../evidence/screenshots/argocd-app-of-apps.jpg)
+
+**Canary at 20%:** v1.0.0 canary at step 1/5, set and actual weight 20, first analysis running.
+
+![Rollouts canary at 20%](../evidence/screenshots/rollouts-canary-20pct.png)
+
+**Bad release aborted:** v3.0.0-bad aborted by the analysis; weight 0, canary scaled to no pods, failed analysis run.
+
+![Rollouts aborted bad release](../evidence/screenshots/rollouts-aborted-bad-release.png)
+
+**Synced but Degraded:** Argo CD after the abort: Synced to the bad commit (Git still names v3.0.0-bad) but Degraded.
+
+![Argo CD Synced but Degraded](../evidence/screenshots/argocd-synced-degraded.jpg)
